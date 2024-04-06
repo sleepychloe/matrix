@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:55:36 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/06 21:43:08 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/07 00:43:03 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,20 @@ void	Vector<K>::scale(const K scalar)
 {
 	for (size_t i = 0; i <= getSize(); i++)
 		this->_vector[i] *= scalar;
+}
+
+template <typename K>
+K	Vector<K>::dot(const Vector &vector)
+{
+	if (getSize() != vector.getSize())
+	{
+		std::string	msg = "error: cannot use dot product with vectors of different sizes";
+		throw (msg);
+	}
+	K	res = 0;
+	for (size_t i = 0; i < getSize(); i++)
+		res = fma(this->_vector[i], vector.getVector()[i], res);
+	return (res);
 }
 
 template <typename K>

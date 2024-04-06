@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/06 20:48:22 by yhwang            #+#    #+#              #
-#    Updated: 2024/04/07 00:32:20 by yhwang           ###   ########.fr        #
+#    Created: 2024/04/07 00:32:09 by yhwang            #+#    #+#              #
+#    Updated: 2024/04/07 00:32:31 by yhwang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ex02
+NAME = ex03
 CPP = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++11
 RM = rm -f
