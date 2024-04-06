@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:55:36 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/06 03:39:14 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/06 04:07:53 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ void	Vector<K>::sub(const Vector &vector)
 }
 
 template <typename K>
-void	Vector<K>::scale(const K factor)
+void	Vector<K>::scale(const K scalar)
 {
 	for (size_t i = 0; i <= getSize(); i++)
-		this->_vector[i] *= factor;
+		this->_vector[i] *= scalar;
 }
 
 template <typename K>

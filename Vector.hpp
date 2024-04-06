@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:30 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/06 03:39:03 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/06 04:07:59 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ public:
 
 	void				add(const Vector &vector);
 	void				sub(const Vector &vector);
-	void				scale(const K factor);
+	void				scale(const K scalar);
 private:
 	Vector();
 

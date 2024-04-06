@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:09 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/06 03:46:57 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/06 04:07:44 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ public:
 
 	void				add(const Matrix &vector);
 	void				sub(const Matrix &vector);
-	void				scale(const K factor);
+	void				scale(const K scalar);
 
 private:
 	Matrix();

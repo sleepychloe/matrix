@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/06 04:02:33 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/06 04:07:38 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,12 @@ void	Matrix<K>::sub(const Matrix &matrix)
 }
 
 template <typename K>
-void	Matrix<K>::scale(const K factor)
+void	Matrix<K>::scale(const K scalar)
 {
 	for (size_t r = 0; r < getRow(); r++)
 	{
 		for (size_t c = 0; c < getColumn(); c++)
-			this->_matrix[r][c] *= factor;
+			this->_matrix[r][c] *= scalar;
 	}
 }
 
