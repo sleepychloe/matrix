@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:28 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/06 04:04:47 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/06 07:23:39 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,7 +307,6 @@ int	main(void)
 		std::cout << MAGENTA << "m2 * -1: " << BLACK << std::endl;
 		m2.scale(-1.);
 		std::cout << m2 << std::endl;
-		std::cout << std::endl;
 	}
 	
 	return (0);
