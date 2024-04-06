@@ -6,14 +6,14 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/05 19:12:27 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/06 04:02:33 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Matrix.hpp"
 
 template <typename K>
-Matrix<K>::Matrix(const std::vector<std::vector<K>> &matrix): _err_msg("")
+Matrix<K>::Matrix(const std::vector<std::vector<K>> &matrix)
 {
 	this->_row = matrix.size();
 	this->_column = matrix[0].size();
@@ -22,14 +22,15 @@ Matrix<K>::Matrix(const std::vector<std::vector<K>> &matrix): _err_msg("")
 	{
 		if (matrix[i].size() != this->_column)
 		{
-			this->_err_msg = "error: invalid size of the input matrix";
-			throw (this->_err_msg);
+			std::string	msg = "error: invalid size of the input matrix";
+			throw (msg);
 		}
+			
 	}
 	if (matrix[0].size() == 0 && this->_column == 0)
 	{
-		this->_err_msg = "error: input matrix is empty";
-		throw (this->_err_msg);
+		std::string	msg = "error: invalid size of the input matrix";
+		throw (msg);
 	}
 	this->_matrix = matrix;
 }
@@ -48,7 +49,6 @@ Matrix<K>& Matrix<K>::operator=(const Matrix &matrix)
 	this->_row = matrix._row;
 	this->_column = matrix._column;
 	this->_matrix = matrix._matrix;
-	this->_err_msg = matrix._err_msg;
 	return (*this);
 }
 
@@ -93,8 +93,49 @@ void	Matrix<K>::printSize(void) const
 }
 
 template <typename K>
+void	Matrix<K>::add(const Matrix &matrix)
+{
+	if (getRow() != matrix.getRow() || getColumn() != matrix.getColumn())
+	{
+		std::string	msg = "error: cannot add matrices of different sizes";
+		throw (msg);
+	}
+	for (size_t r = 0; r < getRow(); r++)
+	{
+		for (size_t c = 0; c < getColumn(); c++)
+			this->_matrix[r][c] += matrix.getMatrix()[r][c];
+	}
+}
+
+template <typename K>
+void	Matrix<K>::sub(const Matrix &matrix)
+{
+	if (getRow() != matrix.getRow() || getColumn() != matrix.getColumn())
+	{
+		std::string	msg = "error: cannot subtract matrices of different sizes";
+		throw (msg);
+	}
+	for (size_t r = 0; r < getRow(); r++)
+	{
+		for (size_t c = 0; c < getColumn(); c++)
+			this->_matrix[r][c] -= matrix.getMatrix()[r][c];
+	}
+}
+
+template <typename K>
+void	Matrix<K>::scale(const K factor)
+{
+	for (size_t r = 0; r < getRow(); r++)
+	{
+		for (size_t c = 0; c < getColumn(); c++)
+			this->_matrix[r][c] *= factor;
+	}
+}
+
+template <typename K>
 std::ostream	&operator<<(std::ostream &ostream, const Matrix<K> &matrix)
 {
+	ostream << "[ ";
 	for (size_t r = 0; r < matrix.getRow(); r++)
 	{
 		for (size_t c = 0; c < matrix.getColumn(); c++)
@@ -104,7 +145,8 @@ std::ostream	&operator<<(std::ostream &ostream, const Matrix<K> &matrix)
 				ostream << " ";
 		}
 		if (r < matrix.getRow() - 1)
-			ostream << std::endl;
+			ostream << std::endl << "  ";
 	}
+	ostream << " ]";
 	return (ostream);
 }

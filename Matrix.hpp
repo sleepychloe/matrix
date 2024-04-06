@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:09 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/05 19:13:05 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/06 03:46:57 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,16 @@ public:
 	bool				isSquare(void) const;
 	void				printSize(void) const;
 
+	void				add(const Matrix &vector);
+	void				sub(const Matrix &vector);
+	void				scale(const K factor);
+
 private:
 	Matrix();
 
 	size_t				_row;
 	size_t				_column;
 	std::vector<std::vector<K>>	_matrix;
-	std::string			_err_msg;
 
 };
 
