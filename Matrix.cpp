@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/07 03:23:54 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/07 20:17:50 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ Matrix<K>::Matrix(const std::vector<std::vector<K>> &matrix)
 }
 
 template <typename K>
-Matrix<K>::Matrix(const Matrix &matrix)
+Matrix<K>::Matrix(const Matrix<K> &matrix)
 {
 	*this = matrix;
 }
 
 template <typename K>
-Matrix<K>& Matrix<K>::operator=(const Matrix &matrix)
+Matrix<K>& Matrix<K>::operator=(const Matrix<K> &matrix)
 {
 	if (this == &matrix)
 		return (*this);
@@ -93,7 +93,7 @@ void	Matrix<K>::printSize(void) const
 }
 
 template <typename K>
-void	Matrix<K>::add(const Matrix &matrix)
+void	Matrix<K>::add(const Matrix<K> &matrix)
 {
 	if (this->_row != matrix.getRow() || getColumn() != matrix.getColumn())
 	{
@@ -108,7 +108,7 @@ void	Matrix<K>::add(const Matrix &matrix)
 }
 
 template <typename K>
-void	Matrix<K>::sub(const Matrix &matrix)
+void	Matrix<K>::sub(const Matrix<K> &matrix)
 {
 	if (this->_row != matrix.getRow() || getColumn() != matrix.getColumn())
 	{

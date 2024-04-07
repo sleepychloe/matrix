@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:55:36 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/07 03:45:14 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/07 20:31:23 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ Vector<K>::Vector(const std::vector<K> &vector): _size(vector.size()), _vector(v
 }
 
 template <typename K>
-Vector<K>::Vector(const Vector &vector)
+Vector<K>::Vector(const Vector<K> &vector)
 {
 	*this = vector;
 }
 
 template <typename K>
-Vector<K>& Vector<K>::operator=(const Vector &vector)
+Vector<K>& Vector<K>::operator=(const Vector<K> &vector)
 {
 	if (this == &vector)
 		return (*this);
@@ -57,7 +57,7 @@ void	Vector<K>::printSize(void) const
 }
 
 template <typename K>
-void	Vector<K>::add(const Vector &vector)
+void	Vector<K>::add(const Vector<K> &vector)
 {
 	if (this->_size != vector.getSize())
 	{
@@ -69,7 +69,7 @@ void	Vector<K>::add(const Vector &vector)
 }
 
 template <typename K>
-void	Vector<K>::sub(const Vector &vector)
+void	Vector<K>::sub(const Vector<K> &vector)
 {
 	if (this->_size != vector.getSize())
 	{
@@ -88,21 +88,23 @@ void	Vector<K>::scale(const K scalar)
 }
 
 template <typename K>
-K	Vector<K>::dot(const Vector &vector)
+K	Vector<K>::dot(const Vector<K> &vector) const
 {
 	if (this->_size != vector.getSize())
 	{
 		std::string	msg = "error: cannot use dot product with vectors of different sizes";
 		throw (msg);
 	}
+
 	K	res = 0;
+
 	for (size_t i = 0; i < this->_size; i++)
 		res = fma(this->_vector[i], vector.getVector()[i], res);
 	return (res);
 }
 
 template <typename K>
-K	Vector<K>::norm_1(void)
+K	Vector<K>::norm_1(void) const
 {
 	K	res = 0;
 
@@ -112,7 +114,7 @@ K	Vector<K>::norm_1(void)
 }
 
 template <typename K>
-K	Vector<K>::norm(void)
+K	Vector<K>::norm(void) const
 {
 	K	res = 0;
 
@@ -122,12 +124,27 @@ K	Vector<K>::norm(void)
 }
 
 template <typename K>
-K	Vector<K>::norm_inf(void)
+K	Vector<K>::norm_inf(void) const
 {
 	K	res = pow(pow(this->_vector[0], 2), 0.5);
 	
 	for (size_t i = 1; i < this->_size; i++)
 		res = pow(std::max(pow(res, 2), pow(this->_vector[i], 2)), 0.5);
+	return (res);
+}
+
+template <typename K>
+K	angle_cos(const Vector<K> &u, const Vector<K> &v)
+{
+	if (u.getSize() != v.getSize())
+	{
+		std::string	msg = "error: cannot calculate cosine between vectors of different sizes";
+		throw (msg);
+	}
+
+	K	res = 0;
+
+	res = fma(u.dot(v), 1 / (u.norm() * v.norm()), res);
 	return (res);
 }
 

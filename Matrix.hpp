@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:09 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/06 04:07:44 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/07 20:17:24 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ class Matrix
 {
 public:
 	Matrix(const std::vector<std::vector<K>> &matrix);
-	Matrix(const Matrix &matrix);
-	Matrix &operator=(const Matrix &matrix);
+	Matrix(const Matrix<K> &matrix);
+	Matrix &operator=(const Matrix<K> &matrix);
 	~Matrix();
 
 	size_t				getRow(void) const;
@@ -32,8 +32,8 @@ public:
 	bool				isSquare(void) const;
 	void				printSize(void) const;
 
-	void				add(const Matrix &vector);
-	void				sub(const Matrix &vector);
+	void				add(const Matrix<K> &vector);
+	void				sub(const Matrix<K> &vector);
 	void				scale(const K scalar);
 
 private:
