@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/06 04:07:38 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/07 03:23:54 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,14 @@ void	Matrix<K>::printSize(void) const
 template <typename K>
 void	Matrix<K>::add(const Matrix &matrix)
 {
-	if (getRow() != matrix.getRow() || getColumn() != matrix.getColumn())
+	if (this->_row != matrix.getRow() || getColumn() != matrix.getColumn())
 	{
 		std::string	msg = "error: cannot add matrices of different sizes";
 		throw (msg);
 	}
-	for (size_t r = 0; r < getRow(); r++)
+	for (size_t r = 0; r < this->_row; r++)
 	{
-		for (size_t c = 0; c < getColumn(); c++)
+		for (size_t c = 0; c < this->_column; c++)
 			this->_matrix[r][c] += matrix.getMatrix()[r][c];
 	}
 }
@@ -110,14 +110,14 @@ void	Matrix<K>::add(const Matrix &matrix)
 template <typename K>
 void	Matrix<K>::sub(const Matrix &matrix)
 {
-	if (getRow() != matrix.getRow() || getColumn() != matrix.getColumn())
+	if (this->_row != matrix.getRow() || getColumn() != matrix.getColumn())
 	{
 		std::string	msg = "error: cannot subtract matrices of different sizes";
 		throw (msg);
 	}
-	for (size_t r = 0; r < getRow(); r++)
+	for (size_t r = 0; r < this->_row; r++)
 	{
-		for (size_t c = 0; c < getColumn(); c++)
+		for (size_t c = 0; c < this->_column; c++)
 			this->_matrix[r][c] -= matrix.getMatrix()[r][c];
 	}
 }
@@ -125,9 +125,9 @@ void	Matrix<K>::sub(const Matrix &matrix)
 template <typename K>
 void	Matrix<K>::scale(const K scalar)
 {
-	for (size_t r = 0; r < getRow(); r++)
+	for (size_t r = 0; r < this->_row; r++)
 	{
-		for (size_t c = 0; c < getColumn(); c++)
+		for (size_t c = 0; c < this->_column; c++)
 			this->_matrix[r][c] *= scalar;
 	}
 }

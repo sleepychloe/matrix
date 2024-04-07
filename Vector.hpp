@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:30 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/07 00:39:19 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/07 03:31:46 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
+#include <algorithm>
 
 template <typename K>
 class Vector
@@ -34,6 +35,9 @@ public:
 	void				sub(const Vector &vector);
 	void				scale(const K scalar);
 	K				dot(const Vector &vector);
+	K				norm_1(void);
+	K				norm(void);
+	K				norm_inf(void);
 	
 private:
 	Vector();
