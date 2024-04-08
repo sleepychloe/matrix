@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 07:14:24 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/08 10:11:57 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/08 21:26:40 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,15 @@ Matrix<K>	lerp(const Matrix<K> &u, const Matrix<K> &v, const K t)
 		std::string	msg = "error: invalid range of the input value t (0 <= t <= 1)";
 		throw (msg);
 	}
-	if (u.getRow() != v.getRow() || u.getColumn() != v.getColumn())
+	if (u.getRowSize() != v.getRowSize() || u.getColumnSize() != v.getColumnSize())
 	{
 		std::string	msg = "error: cannot use linear interpolation with matrices of different sizes";
 		throw (msg);
 	}
-	std::vector<std::vector<K>>	res(u.getRow(), std::vector<K>(u.getColumn()));
-	for (size_t r = 0; r < u.getRow(); r++)
+	std::vector<std::vector<K>>	res(u.getRowSize(), std::vector<K>(u.getColumnSize()));
+	for (size_t r = 0; r < u.getRowSize(); r++)
 	{
-		for (size_t c = 0; c < u.getColumn(); c++)
+		for (size_t c = 0; c < u.getColumnSize(); c++)
 			res[r][c] = fma(v.getMatrix()[r][c] - u.getMatrix()[r][c], t, u.getMatrix()[r][c]);
 	}
 	return (Matrix<K>(res));

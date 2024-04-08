@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:55:36 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/08 10:12:18 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/08 21:34:04 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ Vector<K>	corss_product(const Vector<K> &u, const Vector<K> &v)
 {
 	if (!(u.getSize() == v.getSize() && u.getSize() == 3))
 	{
-		std::string	msg = "error: cannot use cross product with non-3d vectors";
+		std::string	msg = "error: cannot use cross product with non-3-demension vectors";
 		throw (msg);
 	}
 
