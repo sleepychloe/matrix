@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:55:36 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/08 09:33:06 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/08 10:12:18 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,23 @@ K	angle_cos(const Vector<K> &u, const Vector<K> &v)
 
 	res = fma(u.dot(v), 1 / (u.norm() * v.norm()), res);
 	return (res);
+}
+
+template <typename K>
+Vector<K>	corss_product(const Vector<K> &u, const Vector<K> &v)
+{
+	if (!(u.getSize() == v.getSize() && u.getSize() == 3))
+	{
+		std::string	msg = "error: cannot use cross product with non-3d vectors";
+		throw (msg);
+	}
+
+	std::vector<K>	res(u.getSize());
+
+	res[0] = u.getVector()[1] * v.getVector()[2] - u.getVector()[2] * v.getVector()[1];
+	res[1] = u.getVector()[2] * v.getVector()[0] - u.getVector()[0] * v.getVector()[2];
+	res[2] = u.getVector()[0] * v.getVector()[1] - u.getVector()[1] * v.getVector()[0];
+	return (Vector<K>(res));
 }
 
 template <typename K>

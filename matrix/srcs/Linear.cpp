@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 07:14:24 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/08 09:32:19 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/08 10:11:57 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ Vector<K>	linearCombination(const std::vector<Vector<K>> &u, const Vector<K> &co
 			throw (msg);
 		}
 		for (size_t r = 0; r < u[0].getSize(); r++)
-		{
 			res[r] = fma(cofs.getVector()[c], u[c].getVector()[r], res[r]);
-		}
 	}
 	return (Vector<K>(res));
 }

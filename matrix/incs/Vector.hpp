@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:30 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/08 09:32:03 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/08 10:02:46 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ private:
 
 template <typename K>
 K		angle_cos(const Vector<K> &u, const Vector<K> &v);
+
+template <typename K>
+Vector<K>	corss_product(const Vector<K> &u, const Vector<K> &v);
 
 template <typename K>
 std::ostream	&operator<<(std::ostream &ostream, const Vector<K> &vector);
