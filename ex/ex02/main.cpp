@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:48:28 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/08 09:47:03 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/09 03:20:08 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,22 +113,31 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << YELLOW << "[ test 03: matrix ]" << BLACK << std::endl;
 	{
-		std::cout << CYAN << "[ 4 by 4 matrices ]" << BLACK << std::endl;
-		Matrix<float>	m1({{11., 12., 13., 14.}, {15., 16., 17., 18.}, {19., 20., 21., 22.}, {23., 24., 25., 26}});
-		Matrix<float>	m2({{12., 13., 14., 15.}, {16., 17., 18., 19.}, {20., 21., 22., 23.}, {24., 25., 26., 27}});
+		std::cout << CYAN << "[ 2 by 3 matrices ]" << BLACK << std::endl;
+		Matrix<float>	m1({{1., 2., 3.,}, {4., 5., 6.}});
+		Matrix<float>	m2({{1.5, 2.5, 3.5,}, {4.5, 5.5, 6.5}});
 		std::cout << MAGENTA << "m1: " << BLACK << std::endl << m1 << std::endl;
 		std::cout << MAGENTA << "m2: " << BLACK << std::endl << m2 << std::endl;
-		std::cout << MAGENTA << "liner interpolation m1, m2 and 0.4: " << BLACK << std::endl;
+		std::cout << MAGENTA << "liner interpolation m1, m2 and 0.7: " << BLACK << std::endl;
 		std::cout << lerp(m1, m2, 0.4f) << std::endl;
+		std::cout << std::endl;
+		
+		std::cout << CYAN << "[ 4 by 4 matrices ]" << BLACK << std::endl;
+		Matrix<float>	m3({{11., 12., 13., 14.}, {15., 16., 17., 18.}, {19., 20., 21., 22.}, {23., 24., 25., 26}});
+		Matrix<float>	m4({{12., 13., 14., 15.}, {16., 17., 18., 19.}, {20., 21., 22., 23.}, {24., 25., 26., 27}});
+		std::cout << MAGENTA << "m3: " << BLACK << std::endl << m3 << std::endl;
+		std::cout << MAGENTA << "m4: " << BLACK << std::endl << m4 << std::endl;
+		std::cout << MAGENTA << "liner interpolation m3, m4 and 0.4: " << BLACK << std::endl;
+		std::cout << lerp(m3, m4, 0.4f) << std::endl;
 		std::cout << std::endl;
 		
 		try
 		{
 			std::cout << CYAN << "[ 4 by 4 matrices with invalid t value ]" << BLACK << std::endl;
-			std::cout << MAGENTA << "m1: " << BLACK << std::endl << m1 << std::endl;
-			std::cout << MAGENTA << "m2: " << BLACK << std::endl << m2 << std::endl;
-			std::cout << MAGENTA << "liner interpolation m1, m2 and 1.2: " << BLACK << std::endl;
-			std::cout << lerp(m1, m2, 1.2f) << std::endl;
+			std::cout << MAGENTA << "m3: " << BLACK << std::endl << m3 << std::endl;
+			std::cout << MAGENTA << "m4: " << BLACK << std::endl << m4 << std::endl;
+			std::cout << MAGENTA << "liner interpolation m3, m4 and 1.2: " << BLACK << std::endl;
+			std::cout << lerp(m3, m4, 1.2f) << std::endl;
 			std::cout << std::endl;
 		}
 		catch(std::string err_msg)
@@ -139,11 +148,11 @@ int	main(void)
 		try
 		{
 			std::cout << CYAN << "[ 4 by 4 matrix and 3 byh 3 matrix ]" << BLACK << std::endl;
-			Matrix<float>	m3({{1., 2., 3.}, {4., 5., 6.}, {7., 8., 9.}});
-			std::cout << MAGENTA << "m2: " << BLACK << std::endl << m2 << std::endl;
-			std::cout << MAGENTA << "m3: " << BLACK << std::endl << m3 << std::endl;
-			std::cout << MAGENTA << "liner interpolation m2, m3 and 0.7: " << BLACK << std::endl;
-			std::cout << lerp(m2, m3, 0.7f) << std::endl;
+			Matrix<float>	m5({{1., 2., 3.}, {4., 5., 6.}, {7., 8., 9.}});
+			std::cout << MAGENTA << "m4: " << BLACK << std::endl << m4 << std::endl;
+			std::cout << MAGENTA << "m5: " << BLACK << std::endl << m5 << std::endl;
+			std::cout << MAGENTA << "liner interpolation m4, m5 and 0.7: " << BLACK << std::endl;
+			std::cout << lerp(m4, m5, 0.7f) << std::endl;
 			std::cout << std::endl;
 		}
 		catch(std::string err_msg)

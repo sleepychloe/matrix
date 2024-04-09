@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/08 23:03:50 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/09 03:08:26 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	Matrix<K>::scale(const K scalar)
 }
 
 template <typename K>
-Vector<K>	Matrix<K>::mul_vec(const Vector<K> &vector)
+Vector<K>	Matrix<K>::mul_vec(const Vector<K> &vector) const
 {
 	if (this->_column != vector.getSize())
 	{
@@ -152,11 +152,11 @@ Vector<K>	Matrix<K>::mul_vec(const Vector<K> &vector)
 }
 
 template <typename K>
-Matrix<K>	Matrix<K>::mul_mat(const Matrix<K> &matrix)
+Matrix<K>	Matrix<K>::mul_mat(const Matrix<K> &matrix) const
 {
 	if (this->_column != matrix.getRowSize())
 	{
-		std::string	msg = "error: cannot multiply m by n matrices with non-n-by-p vector";
+		std::string	msg = "error: cannot multiply m by n matrix with non-n-by-p matrix";
 		throw (msg);
 	}
 
@@ -171,6 +171,28 @@ Matrix<K>	Matrix<K>::mul_mat(const Matrix<K> &matrix)
 		}
 	}
 	return (Matrix<K>(res));
+}
+
+template <typename K>
+K	Matrix<K>::trace(void) const
+{
+	if (isSquare() == false)
+	{
+		std::string	msg = "error: cannot define trace of non-square matrix";
+		throw (msg);
+	}
+
+	K	res = 0;
+
+	for (size_t r = 0; r < this->_row; r++)
+	{
+		for (size_t c = 0; c < this->_column; c++)
+		{
+			if (r == c)
+				res += this->_matrix[r][c];
+		}
+	}
+	return (res);
 }
 
 template <typename K>

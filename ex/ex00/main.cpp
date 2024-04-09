@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:28 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/08 09:45:48 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/09 03:31:13 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,42 +49,42 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << YELLOW << "[ test 02: matrix class ]" << BLACK << std::endl;
 	{
-		std::cout << CYAN << "[ 1 * 1 matrix ]" << BLACK << std::endl;
+		std::cout << CYAN << "[ 1 by 1 matrix ]" << BLACK << std::endl;
 		Matrix<float> m1{{{1.}}};
 		std::cout << m1 << std::endl;
 		std::cout << MAGENTA << "size: " << BLACK;
 		m1.printSize();
 		std::cout << std::endl;
 
-		std::cout << CYAN << "[ 2 * 2 matrix ]" << BLACK << std::endl;
+		std::cout << CYAN << "[ 2 by 2 matrix ]" << BLACK << std::endl;
 		Matrix<float> m2({{1., 2.}, {3., 4.}});
 		std::cout << m2 << std::endl;
 		std::cout << MAGENTA << "size: " << BLACK;
 		m2.printSize();
 		std::cout << std::endl;
 
-		std::cout << CYAN << "[ 3 * 3 matrix ]" << BLACK << std::endl;
+		std::cout << CYAN << "[ 3 by 3 matrix ]" << BLACK << std::endl;
 		Matrix<float> m3({{1., 2., 3.}, {4., 5., 6.}, {7., 8., 9.}});
 		std::cout << m3 << std::endl;
 		std::cout << MAGENTA << "size: " << BLACK;
 		m3.printSize();
 		std::cout << std::endl;
 
-		std::cout << CYAN << "[ 4 * 4 matrix ]" << BLACK << std::endl;
-		Matrix<float> m4({{1., 2., 3., 4.}, {5., 6., 7., 8.}, {1., 2., 3., 4.}});
+		std::cout << CYAN << "[ 4 by 4 matrix ]" << BLACK << std::endl;
+		Matrix<float> m4({{1., 2., 3., 4.}, {5., 6., 7., 8.}, {1., 2., 3., 4.}, {5., 6., 7., 8.}});
 		std::cout << m4 << std::endl;
 		std::cout << MAGENTA << "size: " << BLACK;
 		m4.printSize();
 		std::cout << std::endl;
 
-		std::cout << CYAN << "[ 2 * 3 matrix ]" << BLACK << std::endl;
+		std::cout << CYAN << "[ 2 by 3 matrix ]" << BLACK << std::endl;
 		Matrix<float> m5({{1., 2., 3.}, {4., 5., 6.}});
 		std::cout << m5 << std::endl;
 		std::cout << MAGENTA << "size: " << BLACK;
 		m5.printSize();
 		std::cout << std::endl;
 		
-		std::cout << CYAN << "[ 4 * 3 matrix ]" << BLACK << std::endl;
+		std::cout << CYAN << "[ 4 by 3 matrix ]" << BLACK << std::endl;
 		Matrix<float> m6({{1., 2., 3.}, {4., 5., 6.}, {7., 8., 9.}, {1, 2, 3.}});
 		std::cout << m6 << std::endl;
 		std::cout << MAGENTA << "size: " << BLACK;
@@ -144,7 +144,7 @@ int	main(void)
 
 		try
 		{
-			std::cout << CYAN << "[ different size ]" << BLACK << std::endl;
+			std::cout << CYAN << "[ 2d vector and 3d vector ]" << BLACK << std::endl;
 			std::cout << MAGENTA << "v2: " << BLACK << std::endl << v2 << std::endl;
 			std::cout << MAGENTA << "v4: " << BLACK << std::endl << v4 << std::endl;
 			std::cout << MAGENTA << "v2 + v4: " << BLACK << std::endl;
@@ -182,7 +182,7 @@ int	main(void)
 
 		try
 		{
-			std::cout << CYAN << "[ different size ]" << BLACK << std::endl;
+			std::cout << CYAN << "[ 2d vector and 3d vector ]" << BLACK << std::endl;
 			std::cout << MAGENTA << "v2: " << BLACK << std::endl << v2 << std::endl;
 			std::cout << MAGENTA << "v4: " << BLACK << std::endl << v4 << std::endl;
 			std::cout << MAGENTA << "v2 - v4: " << BLACK << std::endl;
@@ -217,7 +217,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << YELLOW << "[ test 06: matrix add ]" << BLACK << std::endl;
 	{
-		std::cout << CYAN << "[ 2 * 2 matrix ]" << BLACK << std::endl;
+		std::cout << CYAN << "[ 2 by 2 matrix ]" << BLACK << std::endl;
 		Matrix<float> m1({{1., 2.}, {3., 4.}});
 		Matrix<float> m2({{2., 3.}, {4., 5.}});
 		std::cout << MAGENTA << "m1: " << BLACK << std::endl << m1 << std::endl;
@@ -227,9 +227,9 @@ int	main(void)
 		std::cout << m1 << std::endl;
 		std::cout << std::endl;
 
-		std::cout << CYAN << "[ 3 * 3 matrix ]" << BLACK << std::endl;
-		Matrix<float> m3({{1., 2., 3.}, {4., 5., 6.}});
-		Matrix<float> m4({{9., 8., 7.}, {6., 5., 4.}});
+		std::cout << CYAN << "[ 3 by 3 matrix ]" << BLACK << std::endl;
+		Matrix<float> m3({{1., 2., 3.}, {4., 5., 6.}, {7., 8., 9.}});
+		Matrix<float> m4({{9., 8., 7.}, {6., 5., 4.}, {3., 2., 1.}});
 		std::cout << MAGENTA << "m3: " << BLACK << std::endl << m3 << std::endl;
 		std::cout << MAGENTA << "m4: " << BLACK << std::endl << m4 << std::endl;
 		std::cout << MAGENTA << "m3 + m4: " << BLACK << std::endl;
@@ -237,9 +237,19 @@ int	main(void)
 		std::cout << m3 << std::endl;
 		std::cout << std::endl;
 
+		std::cout << CYAN << "[ 2 by 3 matrix ]" << BLACK << std::endl;
+		Matrix<float> m5({{1., 2., 3.}, {4., 5., 6.}});
+		Matrix<float> m6({{9., 8., 7.}, {6., 5., 4.}});
+		std::cout << MAGENTA << "m5: " << BLACK << std::endl << m5 << std::endl;
+		std::cout << MAGENTA << "m6: " << BLACK << std::endl << m6 << std::endl;
+		std::cout << MAGENTA << "m5 + m6: " << BLACK << std::endl;
+		m5.add(m6);
+		std::cout << m5 << std::endl;
+		std::cout << std::endl;
+
 		try
 		{
-			std::cout << CYAN << "[ different size ]" << BLACK << std::endl;
+			std::cout << CYAN << "[ 2 by 2 matrix and 3 by 3 matrix ]" << BLACK << std::endl;
 			std::cout << MAGENTA << "m2: " << BLACK << std::endl << m2 << std::endl;
 			std::cout << MAGENTA << "m4: " << BLACK << std::endl << m4 << std::endl;
 			std::cout << MAGENTA << "m2 + m4: " << BLACK << std::endl;
@@ -255,7 +265,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << YELLOW << "[ test 07: matrix subtract ]" << BLACK << std::endl;
 	{
-		std::cout << CYAN << "[ 2 * 2 matrix ]" << BLACK << std::endl;
+		std::cout << CYAN << "[ 2 by 2 matrix ]" << BLACK << std::endl;
 		Matrix<float> m1({{1., 2.}, {3., 4.}});
 		Matrix<float> m2({{9., 8.}, {7., 6.}});
 		std::cout << MAGENTA << "m1: " << BLACK << std::endl << m1 << std::endl;
@@ -265,9 +275,9 @@ int	main(void)
 		std::cout << m1 << std::endl;
 		std::cout << std::endl;
 
-		std::cout << CYAN << "[ 3 * 3 matrix ]" << BLACK << std::endl;
-		Matrix<float> m3({{9., 8., 7.}, {6., 5., 4.}});
-		Matrix<float> m4({{1., 2., 3.}, {4., 5., 6.}});
+		std::cout << CYAN << "[ 3 by 3 matrix ]" << BLACK << std::endl;
+		Matrix<float> m3({{1., 2., 3.}, {4., 5., 6.}, {7., 8., 9.}});
+		Matrix<float> m4({{9., 8., 7.}, {6., 5., 4.}, {3., 2., 1.}});
 		std::cout << MAGENTA << "m3: " << BLACK << std::endl << m3 << std::endl;
 		std::cout << MAGENTA << "m4: " << BLACK << std::endl << m4 << std::endl;
 		std::cout << MAGENTA << "m3 - m4: " << BLACK << std::endl;
@@ -275,9 +285,19 @@ int	main(void)
 		std::cout << m3 << std::endl;
 		std::cout << std::endl;
 
+		std::cout << CYAN << "[ 2 by 3 matrix ]" << BLACK << std::endl;
+		Matrix<float> m5({{1., 2., 3.}, {4., 5., 6.}});
+		Matrix<float> m6({{9., 8., 7.}, {6., 5., 4.}});
+		std::cout << MAGENTA << "m5: " << BLACK << std::endl << m5 << std::endl;
+		std::cout << MAGENTA << "m6: " << BLACK << std::endl << m6 << std::endl;
+		std::cout << MAGENTA << "m5 + m6: " << BLACK << std::endl;
+		m5.sub(m6);
+		std::cout << m5 << std::endl;
+		std::cout << std::endl;
+
 		try
 		{
-			std::cout << CYAN << "[ different size ]" << BLACK << std::endl;
+			std::cout << CYAN << "[ 2 by 2 matrix and 3 by 3 matrix ]" << BLACK << std::endl;
 			std::cout << MAGENTA << "m2: " << BLACK << std::endl << m2 << std::endl;
 			std::cout << MAGENTA << "m4: " << BLACK << std::endl << m4 << std::endl;
 			std::cout << MAGENTA << "m2 - m4: " << BLACK << std::endl;
@@ -293,7 +313,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << YELLOW << "[ test 08: matrix scaling ]" << BLACK << std::endl;
 	{
-		std::cout << CYAN << "[ 2 * 2 matrix ]" << BLACK << std::endl;
+		std::cout << CYAN << "[ 2 by 2 matrix ]" << BLACK << std::endl;
 		Matrix<float> m1({{1., 2.}, {3., 4.}});
 		std::cout << MAGENTA << "m1: " << BLACK << std::endl << m1 << std::endl;
 		std::cout << MAGENTA << "m1 * 2: " << BLACK << std::endl;
@@ -301,12 +321,19 @@ int	main(void)
 		std::cout << m1 << std::endl;
 		std::cout << std::endl;
 
-		std::cout << CYAN << "[ 3 * 3 matrix ]" << BLACK << std::endl;
-		Matrix<float> m2({{1., 2., 3.}, {4., 5., 6.}});
+		std::cout << CYAN << "[ 3 by 3 matrix ]" << BLACK << std::endl;
+		Matrix<float> m2({{1., 2., 3.}, {4., 5., 6.}, {7., 8., 9.}});
 		std::cout << MAGENTA << "m2: " << BLACK << std::endl << m2 << std::endl;
 		std::cout << MAGENTA << "m2 * -1: " << BLACK << std::endl;
 		m2.scale(-1.);
 		std::cout << m2 << std::endl;
+
+		std::cout << CYAN << "[ 2 by 3 matrix ]" << BLACK << std::endl;
+		Matrix<float> m3({{1., 2., 3.}, {4., 5., 6.}});
+		std::cout << MAGENTA << "m3: " << BLACK << std::endl << m3 << std::endl;
+		std::cout << MAGENTA << "m3 * -1.5: " << BLACK << std::endl;
+		m3.scale(-1.3);
+		std::cout << m3 << std::endl;
 	}
 	
 	return (0);

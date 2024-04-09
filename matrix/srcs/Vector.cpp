@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:55:36 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/08 21:34:04 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/09 03:03:38 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ K	Vector<K>::dot(const Vector<K> &vector) const
 {
 	if (this->_size != vector.getSize())
 	{
-		std::string	msg = "error: cannot use dot product with vectors of different sizes";
+		std::string	msg = "error: cannot define dot product of vectors of different sizes";
 		throw (msg);
 	}
 
@@ -153,7 +153,7 @@ Vector<K>	corss_product(const Vector<K> &u, const Vector<K> &v)
 {
 	if (!(u.getSize() == v.getSize() && u.getSize() == 3))
 	{
-		std::string	msg = "error: cannot use cross product with non-3-demension vectors";
+		std::string	msg = "error: cannot define cross product of non-3-demension vectors";
 		throw (msg);
 	}
 
