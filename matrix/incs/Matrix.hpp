@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:09 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/09 02:59:21 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/09 21:30:38 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ public:
 	Vector<K>			mul_vec(const Vector<K> &vector) const;
 	Matrix<K>			mul_mat(const Matrix<K> &matrix) const;
 	K				trace(void) const;
+	Matrix<K>			transpose(void) const;
 
 private:
 	Matrix();

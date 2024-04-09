@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/09 03:08:26 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/09 21:37:09 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,19 @@ K	Matrix<K>::trace(void) const
 			if (r == c)
 				res += this->_matrix[r][c];
 		}
+	}
+	return (res);
+}
+
+template <typename K>
+Matrix<K>	Matrix<K>::transpose(void) const
+{
+	std::vector<std::vector<K>>	res(this->_column, std::vector<K>(this->_row));
+
+	for (size_t r = 0; r < this->_row; r++)
+	{
+		for (size_t c = 0; c < this->_column; c++)
+			res[c][r] = this->_matrix[r][c];
 	}
 	return (res);
 }
