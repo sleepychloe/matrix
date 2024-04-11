@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:09 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/11 10:06:10 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/11 10:19:10 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ public:
 	K				trace(void) const;
 	Matrix<K>			transpose(void) const;
 	Matrix<K>			row_echelon(void) const;
+	K				determinant(void) const;
 
 private:
 	Matrix();

@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/11 10:09:30 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/11 10:19:38 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,6 +288,12 @@ Matrix<K>	Matrix<K>::row_echelon(void) const
 		}
 	}
 	return (Matrix<K>(res));
+}
+
+template <typename K>
+K	Matrix<K>::determinant(void) const
+{
+	
 }
 
 template <typename K>
