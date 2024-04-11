@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/11 10:00:54 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/11 10:09:30 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,42 +208,39 @@ Matrix<K>	Matrix<K>::transpose(void) const
 	return (Matrix<K>(res));
 }
 
-/* row operation 1: swap two row
-	ex) rowOperation_1(m, r1, r2) swaps m[r1] and m[r2] */
-template <typename K>
-void	Matrix<K>::rowOperation_1(std::vector<std::vector<K>> *m, size_t r1, size_t r2) const
-{
-	std::vector<K>	tmp = (*m)[r1];
-
-	(*m)[r1] = (*m)[r2];
-	(*m)[r2] = tmp;
-}
-
-/* row operation 2: multiply a row by a nonzero number
-	ex) rowOperation_2(m, r, k): multiplies m[r] by k */
-template <typename K>
-void	Matrix<K>::rowOperation_2(std::vector<std::vector<K>> *m, size_t r, K k) const
-{
-	for (size_t c = 0; c < this->_column; c++)
-		(*m)[r][c] *= k;
-}
-
-/* row operation 3: add a multiple of one row to another row
-	ex) rowOperation_3(m, r1, k, r2) replaces m[r1] to m[r1] + k * m[r2] */
-template <typename K>
-void	Matrix<K>::rowOperation_3(std::vector<std::vector<K>> *m, size_t r1, K k, size_t r2) const
-{
-	for (size_t c = 0; c < this->_column; c++)
-		(*m)[r1][c] += k * (*m)[r2][c];
-}
-
 template <typename K>
 Matrix<K>	Matrix<K>::row_echelon(void) const
 {
 	std::vector<std::vector<K>>	res = this->_matrix;
 	size_t				pvt[this->_row] = {0,};
 
-	std::function<void(size_t)>	setPivot = [&](size_t r)
+	/* row operation 1: swap two row
+	ex) rowOperation_1(m, r1, r2) swaps m[r1] and m[r2] */
+	std::function<void(size_t, size_t)>	rowOperation_1 = [&](size_t r1, size_t r2)
+	{
+		std::vector<K>	tmp = res[r1];
+
+		res[r1] = res[r2];
+		res[r2] = tmp;
+	};
+
+	/* row operation 2: multiply a row by a nonzero number
+	ex) rowOperation_2(m, r, k): multiplies m[r] by k */
+	std::function<void(size_t, K)>		rowOperation_2 = [&](size_t r, K k)
+	{
+		for (size_t c = 0; c < this->_column; c++)
+			res[r][c] *= k;
+	};
+
+	/* row operation 3: add a multiple of one row to another row
+	ex) rowOperation_3(m, r1, k, r2) replaces m[r1] to m[r1] + k * m[r2] */
+	std::function<void(size_t, K, size_t)>	rowOperation_3 = [&](size_t r1, K k, size_t r2)
+	{
+		for (size_t c = 0; c < this->_column; c++)
+			res[r1][c] += k * res[r2][c];
+	};
+
+	std::function<void(size_t)>		setPivot = [&](size_t r)
 	{
 		for (size_t c = 0; c < this->_column; c++)
 		{
@@ -264,7 +261,7 @@ Matrix<K>	Matrix<K>::row_echelon(void) const
 	{
 		/* re-arrange rows */
 		if (r < this->_row - 1 && pvt[r] > pvt[r + 1])
-			rowOperation_1(&res, r, r + 1);
+			rowOperation_1(r, r + 1);
 		
 		/* gaussian elimination */
 		if (r != 0 && pvt[r] <= pvt[r - 1])
@@ -272,13 +269,13 @@ Matrix<K>	Matrix<K>::row_echelon(void) const
 			for (size_t i = 0; i < r; i++)
 			{
 				if (res[i][pvt[i]] != 0)
-					rowOperation_3(&res, r, -1 * res[r][pvt[i]] / res[i][pvt[i]], i);
+					rowOperation_3(r, -1 * res[r][pvt[i]] / res[i][pvt[i]], i);
 				pvt[r] = 0;
 				setPivot(r);
 			}
 		}
 		if (res[r][pvt[r]] != 0)
-			rowOperation_2(&res, r, 1 / res[r][pvt[r]]);
+			rowOperation_2(r, 1 / res[r][pvt[r]]);
 	}
 
 	/* reduced row echelon form */
@@ -287,7 +284,7 @@ Matrix<K>	Matrix<K>::row_echelon(void) const
 		for (size_t i = 0; i < this->_row; i++)
 		{
 			if (i != r && res[r][pvt[r]] != 0)
-				rowOperation_3(&res, i, -1 * res[i][pvt[r]] / res[r][pvt[r]], r);
+				rowOperation_3(i, -1 * res[i][pvt[r]] / res[r][pvt[r]], r);
 		}
 	}
 	return (Matrix<K>(res));
