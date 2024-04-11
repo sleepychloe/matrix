@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/11 20:18:45 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/12 01:10:12 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,6 +319,19 @@ std::vector<std::vector<K>>	Matrix<K>::minor(size_t m, size_t n) const
 }
 
 template <typename K>
+K	Matrix<K>::cofactor(size_t r, size_t c) const
+{
+	if (getRowSize() == 1)
+		return (this->_matrix[0][0]);
+
+	Matrix<K>	m = minor(r, c);
+	K		res;
+
+	res = (((r + c) % 2 == 0 ? 1 : -1)) * m.determinant();
+	return (res);
+}
+
+template <typename K>
 K	Matrix<K>::determinant(void) const
 {
 	if (isSquare() == false)
@@ -331,11 +344,43 @@ K	Matrix<K>::determinant(void) const
 		return (this->_matrix[0][0]);
 	
 	K	res = 0;
-	for (size_t c = 0; c < getColumnSize(); c++)
+
+	for (size_t c = 0; c < this->_column; c++)
+		res = fma(this->_matrix[0][c], cofactor(0, c), res);
+	return (res);
+}
+
+template <typename K>
+Matrix<K>	Matrix<K>::inverse(void) const
+{
+	if (isSquare() == false)
 	{
-		Matrix<K>	m = minor(0, c);
-		res += this->_matrix[0][c] * ((c % 2 == 0 ? 1 : -1)) * m.determinant();
+		std::string	msg = "error: cannot define inverse matrix of non-square matrix";
+		throw (msg);
 	}
+
+	K	det = determinant();
+
+	if (det == 0)
+	{
+		std::string	msg = "error: singular matrix(determinant of the matrix is 0)";
+		throw (msg);
+	}
+
+	std::vector<std::vector<K>>	cofactor_matrix(this->_row, std::vector<K>(this->_column));
+
+	if (getRowSize() == 1)
+		return (Matrix<K>{{{1 / this->_matrix[0][0]}}});
+
+	for (size_t r = 0; r < this->_row; r++)
+	{
+		for (size_t c = 0; c < this->_column; c++)
+			cofactor_matrix[r][c] = cofactor(r, c);
+	}
+
+	Matrix<K>	res = Matrix<K>(cofactor_matrix).transpose();
+
+	res.scale(1 / det);
 	return (res);
 }
 
