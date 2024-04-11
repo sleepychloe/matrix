@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:09 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/09 21:30:38 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/10 04:34:27 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <iostream>
 #include <string>
 #include "./Vector.hpp"
+
+# define EPSILON			1e-10
 
 template <typename K>
 class Matrix
@@ -40,6 +42,7 @@ public:
 	Matrix<K>			mul_mat(const Matrix<K> &matrix) const;
 	K				trace(void) const;
 	Matrix<K>			transpose(void) const;
+	Matrix<K>			row_echelon(void) const;
 
 private:
 	Matrix();
@@ -48,6 +51,9 @@ private:
 	size_t				_column;
 	std::vector<std::vector<K>>	_matrix;
 
+	void				rowOperation_1(std::vector<std::vector<K>> *m, size_t r1, size_t r2) const;
+	void				rowOperation_2(std::vector<std::vector<K>> *m, size_t r, K k) const;
+	void				rowOperation_3(std::vector<std::vector<K>> *m, size_t r1, K k, size_t r2) const;
 };
 
 template <typename K>

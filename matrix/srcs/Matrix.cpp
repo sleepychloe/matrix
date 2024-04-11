@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/09 21:37:09 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/10 08:25:20 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,100 @@ Matrix<K>	Matrix<K>::transpose(void) const
 		for (size_t c = 0; c < this->_column; c++)
 			res[c][r] = this->_matrix[r][c];
 	}
-	return (res);
+	return (Matrix<K>(res));
+}
+
+/* row operation 1: swap two row
+	ex) rowOperation_1(m, r1, r2) swaps m[r1] and m[r2] */
+template <typename K>
+void	Matrix<K>::rowOperation_1(std::vector<std::vector<K>> *m, size_t r1, size_t r2) const
+{
+	std::vector<K>	tmp = (*m)[r1];
+
+	(*m)[r1] = (*m)[r2];
+	(*m)[r2] = tmp;
+}
+
+/* row operation 2: multiply a row by a nonzero number
+	ex) rowOperation_2(m, r, k): multiplies m[r] by k */
+template <typename K>
+void	Matrix<K>::rowOperation_2(std::vector<std::vector<K>> *m, size_t r, K k) const
+{
+	for (size_t c = 0; c < this->_column; c++)
+		(*m)[r][c] *= k;
+}
+
+/* row operation 3: add a multiple of one row to another row
+	ex) rowOperation_3(m, r1, k, r2) replaces m[r1] to m[r1] + k * m[r2] */
+template <typename K>
+void	Matrix<K>::rowOperation_3(std::vector<std::vector<K>> *m, size_t r1, K k, size_t r2) const
+{
+	for (size_t c = 0; c < this->_column; c++)
+		(*m)[r1][c] += k * (*m)[r2][c];
+}
+
+template <typename K>
+Matrix<K>	Matrix<K>::row_echelon(void) const
+{
+	std::vector<std::vector<K>>	res = this->_matrix;
+	size_t				pvt[this->_row] = {0,};
+
+	/* set pivot */
+	for (size_t r = 0; r < this->_row; r++)
+	{
+		for (size_t c = 0; c < this->_column; c++)
+		{
+			if (res[r][c] != 0)
+				break ;
+			if ((c == 0 || (c > 0 && res[r][c - 1] == 0)))
+				pvt[r]++;
+		}
+	}
+
+	/* re-arrange rows */
+	for (size_t r = 0; r < this->_row - 1; r++)
+	{
+		if (pvt[r] > pvt[r + 1])
+			rowOperation_1(&res, r, r + 1);
+	}
+
+	/* gaussian elimination */
+	for (size_t r = 0; r < this->_row; r++)
+	{
+		if (r != 0 && pvt[r] <= pvt[r - 1])
+		{
+			for (size_t i = 0; i < r; i++)
+			{
+				if (res[i][pvt[i]] != 0)
+					rowOperation_3(&res, r, -1 * res[r][pvt[i]] / res[i][pvt[i]], i);
+				/* update pivot */
+				pvt[r] = 0;
+				for (size_t c = 0; c < this->_column; c++)
+				{
+					if (res[r][c] != 0)
+						break ;
+					if (-1 * EPSILON < res[r][c] && res[r][c] < EPSILON)
+					{
+						res[r][c] = 0;
+						if ((c == 0 && this->_column > 1) || (c > 0 && res[r][c - 1] == 0))
+							pvt[r]++;
+					}
+				}
+			}
+		}
+		if (res[r][pvt[r]] != 0)
+			rowOperation_2(&res, r, 1 / res[r][pvt[r]]);
+	}
+	/* reduced row echelon form */
+	for (size_t r = 0; r < this->_row; r++)
+	{
+		for (size_t i = 0; i < this->_row; i++)
+		{
+			if (i != r && res[r][pvt[r]] != 0)
+				rowOperation_3(&res, i, -1 * res[i][pvt[r]] / res[r][pvt[r]], r);
+		}
+	}
+	return (Matrix<K>(res));
 }
 
 template <typename K>
