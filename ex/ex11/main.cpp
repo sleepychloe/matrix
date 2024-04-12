@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:16:43 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/12 01:05:10 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/12 02:14:22 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	main(void)
 		}
 		std::cout << std::endl;
 	}
-	std::cout << "to check the right answer:" << std::endl
+	std::cout << "to check the answers:" << std::endl
 		<< "https://www.emathhelp.net/en/linear-algebra-calculator/?action=matrix%20determinant" << std::endl;
 	
 	return (0);

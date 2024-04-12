@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 20:57:15 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/08 23:09:22 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/12 02:13:39 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,9 @@ int	main(void)
 		{
 			std::cerr << RED << err_msg << BLACK << std::endl;
 		}
+		std::cout << std::endl;
 	}
+	std::cout << "to check the answers:" << std::endl
+		<< "https://www.emathhelp.net/en/linear-algebra-calculator/?action=multiply%20matrices" << std::endl;
 	return (0);
 }

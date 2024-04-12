@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 01:43:13 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/12 02:02:53 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/12 02:13:50 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	main(void)
 		std::cout << m4.rank() << std::endl;
 		std::cout << std::endl;
 	}
-	std::cout << "to check the right answer:" << std::endl
+	std::cout << "to check the answers:" << std::endl
 		<< "https://www.emathhelp.net/en/linear-algebra-calculator/?action=matrix%20rank" << std::endl;
 	return (0);
 }

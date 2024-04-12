@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 21:57:26 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/10 08:44:56 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/12 02:14:14 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ int	main(void)
 		std::cout << m6.row_echelon() << std::endl;
 		std::cout << std::endl;
 	}
-	std::cout << "to check the right answer:" << std::endl
+	std::cout << "to check the answers:" << std::endl
 		<< "https://www.emathhelp.net/en/calculators/linear-algebra/reduced-row-echelon-form-rref-calculator/" << std::endl;
 	return (0);
 }
