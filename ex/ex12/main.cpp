@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 00:20:13 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/12 01:17:09 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/12 01:57:43 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(void)
 		std::cout << std::endl;
 
 		std::cout << CYAN << "[ 3 by 3 matrix ]" << BLACK << std::endl;
-		Matrix<float>	m3({{1.1, 5.5, -2.7}, {86.1, 7.3, 21}, {1.3, 5.2, 19}});
+		Matrix<float>	m3({{1.1, 5.5, -2.7}, {86.1, 7.3, 21.}, {1.3, 5.2, 19.}});
 		std::cout << MAGENTA << "m3: " << BLACK << std::endl << m3 << std::endl;
 		std::cout << MAGENTA << "m3⁻¹: " << BLACK << std::endl;
 		std::cout << m3.inverse() << std::endl;

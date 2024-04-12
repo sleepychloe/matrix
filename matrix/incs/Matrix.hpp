@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:09 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/12 00:41:57 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/12 01:44:18 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ public:
 	Matrix<K>			row_echelon(void) const;
 	K				determinant(void) const;
 	Matrix<K>			inverse(void) const;
+	size_t				rank(void) const;
 
 private:
 	Matrix();

@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/12 01:10:12 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/12 01:59:35 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -381,6 +381,29 @@ Matrix<K>	Matrix<K>::inverse(void) const
 	Matrix<K>	res = Matrix<K>(cofactor_matrix).transpose();
 
 	res.scale(1 / det);
+	return (res);
+}
+
+template <typename K>
+size_t	Matrix<K>::rank(void) const
+{
+	Matrix<K>	rref = row_echelon();
+	size_t		res = this->_row;
+	size_t		tmp = 0;
+
+	for (size_t r = 0; r < this->_row; r++)
+	{
+		for (size_t c = 0; c < this->_column; c++)
+		{
+			if (rref.getMatrix()[r][c] != 0)
+				break ;
+			if ((c == 0 && this->_column > 1) || (c > 0 && rref.getMatrix()[r][c - 1] == 0))
+				tmp++;
+		}
+		if (tmp == this->_column)
+			res--;
+		tmp = 0;
+	}
 	return (res);
 }
 
