@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:45:44 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/13 19:19:47 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/13 21:46:07 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,9 +235,38 @@ int	main(void)
 			v3.add(v4);
 			std::cout << v3 << std::endl;
 			std::cout << std::endl;
+
+			std::cout << CYAN << "[ 2 by 2 matrix ]" << BLACK << std::endl;
+			Matrix<Complex<float>> m1({{Complex<float>(1., 1.), Complex<float>(2., 2.)},
+						{Complex<float>(3., 3.), Complex<float>(4., 4.)}});
+			Matrix<Complex<float>> m2({{Complex<float>(5., 5.), Complex<float>(6., 6.)},
+						{Complex<float>(7., 7.), Complex<float>(8., 8.)}});
+			std::cout << MAGENTA << "m1: " << BLACK << std::endl << m1 << std::endl;
+			std::cout << MAGENTA << "m2: " << BLACK << std::endl << m2 << std::endl;
+			std::cout << MAGENTA << "m1 + m2: " << BLACK << std::endl;
+			m1.add(m2);
+			std::cout << m1 << std::endl;
+			std::cout << std::endl;
+
+			std::cout << CYAN << "[ 3 by 3 matrix ]" << BLACK << std::endl;
+			Matrix<Complex<float>> m3({{Complex<float>(1., 1.), Complex<float>(2., 2.), Complex<float>(3., 3.)},
+						{Complex<float>(4., 4.), Complex<float>(5., 5.), Complex<float>(6., 6.)},
+						{Complex<float>(7., 7.), Complex<float>(8., 8.), Complex<float>(9., 9.)},});
+			Matrix<Complex<float>> m4({{Complex<float>(9., 9.), Complex<float>(8., 8.), Complex<float>(7., 7.)},
+						{Complex<float>(6., 6.), Complex<float>(5., 5.), Complex<float>(4., 4.)},
+						{Complex<float>(3., 3.), Complex<float>(2., 2.), Complex<float>(1., 1.)},});
+			std::cout << MAGENTA << "m3: " << BLACK << std::endl << m3 << std::endl;
+			std::cout << MAGENTA << "m4: " << BLACK << std::endl << m4 << std::endl;
+			std::cout << MAGENTA << "m3 + m4: " << BLACK << std::endl;
+			m3.add(m4);
+			std::cout << m3 << std::endl;
+			std::cout << std::endl;
 		}
 		std::cout << std::endl;
 		// std::cout << YELLOW << "[ test 01-03 : subtract ]" << BLACK << std::endl;
+		// {
+			
+		// }
 	}
 	return (0);
 }

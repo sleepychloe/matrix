@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/13 06:56:03 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/13 21:44:11 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,16 +237,73 @@ void	Matrix<K>::rowOperation_3(std::vector<std::vector<K>> *m, size_t r1, K k, s
 		(*m)[r1][c] += k * (*m)[r2][c];
 }
 
+// template <typename K>
+// Matrix<K>	Matrix<K>::row_echelon(void) const
+// {
+// 	std::vector<std::vector<K>>	res = this->_matrix;
+// 	size_t				pvt[this->_row] = {0,};
+
+// 	std::function<void(size_t)>		setPivot = [&](size_t r)
+// 	{
+// 		for (size_t c = 0; c < this->_column; c++)
+// 		{
+// 			if (-1 * EPSILON < res[r][c] && res[r][c] < EPSILON)
+// 				res[r][c] = 0;
+// 			if (res[r][c] != 0)
+// 				break ;
+// 			if ((c == 0 && this->_column > 1) || (c > 0 && res[r][c - 1] == 0))
+// 				pvt[r]++;
+// 		}
+// 	};
+
+// 	for (size_t r = 0; r < this->_row; r++)
+// 		setPivot(r);
+
+// 	/* row echelon form */
+// 	for (size_t r = 0; r < this->_row; r++)
+// 	{
+// 		/* re-arrange rows */
+// 		if (r < this->_row - 1 && pvt[r] > pvt[r + 1])
+// 			rowOperation_1(&res, r, r + 1);
+		
+// 		/* gaussian elimination */
+// 		if (r != 0 && pvt[r] <= pvt[r - 1])
+// 		{
+// 			for (size_t i = 0; i < r; i++)
+// 			{
+// 				if (res[i][pvt[i]] != 0)
+// 					rowOperation_3(&res, r, -1 * res[r][pvt[i]] / res[i][pvt[i]], i);
+// 				pvt[r] = 0;
+// 				setPivot(r);
+// 			}
+// 		}
+// 		if (res[r][pvt[r]] != 0)
+// 			rowOperation_2(&res, r, 1 / res[r][pvt[r]]);
+// 	}
+
+// 	/* reduced row echelon form */
+// 	for (size_t r = 0; r < this->_row; r++)
+// 	{
+// 		for (size_t i = 0; i < this->_row; i++)
+// 		{
+// 			if (i != r && res[r][pvt[r]] != 0)
+// 				rowOperation_3(&res, i, -1 * res[i][pvt[r]] / res[r][pvt[r]], r);
+// 		}
+// 	}
+// 	return (Matrix<K>(res));
+// }
+
 template <typename K>
 Matrix<K>	Matrix<K>::row_echelon(void) const
 {
 	std::vector<std::vector<K>>	res = this->_matrix;
-	size_t				pvt[this->_row] = {0,};
+	size_t				pvt[this->_row] = {0, };
 
 	std::function<void(size_t)>		setPivot = [&](size_t r)
 	{
 		for (size_t c = 0; c < this->_column; c++)
 		{
+			// pvt[r] = 0;
 			if (-1 * EPSILON < res[r][c] && res[r][c] < EPSILON)
 				res[r][c] = 0;
 			if (res[r][c] != 0)
@@ -271,13 +328,13 @@ Matrix<K>	Matrix<K>::row_echelon(void) const
 		{
 			for (size_t i = 0; i < r; i++)
 			{
-				if (res[i][pvt[i]] != 0)
+				if (pvt[i] != this->_column && res[i][pvt[i]] != 0)
 					rowOperation_3(&res, r, -1 * res[r][pvt[i]] / res[i][pvt[i]], i);
 				pvt[r] = 0;
 				setPivot(r);
 			}
 		}
-		if (res[r][pvt[r]] != 0)
+		if (pvt[r] != this->_column && res[r][pvt[r]] != 0)
 			rowOperation_2(&res, r, 1 / res[r][pvt[r]]);
 	}
 
@@ -286,7 +343,7 @@ Matrix<K>	Matrix<K>::row_echelon(void) const
 	{
 		for (size_t i = 0; i < this->_row; i++)
 		{
-			if (i != r && res[r][pvt[r]] != 0)
+			if (i != r && pvt[r] != this->_column && res[r][pvt[r]] != 0)
 				rowOperation_3(&res, i, -1 * res[i][pvt[r]] / res[r][pvt[r]], r);
 		}
 	}

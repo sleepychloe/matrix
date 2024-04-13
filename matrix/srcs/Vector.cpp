@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:55:36 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/09 03:03:38 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/13 21:05:26 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	Vector<K>::add(const Vector<K> &vector)
 		std::string	msg = "error: cannot add vectors of different sizes";
 		throw (msg);
 	}
-	for (size_t i = 0; i <= getSize(); i++)
+	for (size_t i = 0; i < getSize(); i++)
 		this->_vector[i] += vector.getVector()[i];
 }
 
@@ -76,14 +76,14 @@ void	Vector<K>::sub(const Vector<K> &vector)
 		std::string	msg = "error: cannot subtract vectors of different sizes";
 		throw (msg);
 	}
-	for (size_t i = 0; i <= getSize(); i++)
+	for (size_t i = 0; i < getSize(); i++)
 		this->_vector[i] -= vector.getVector()[i];
 }
 
 template <typename K>
 void	Vector<K>::scale(const K scalar)
 {
-	for (size_t i = 0; i <= this->_size; i++)
+	for (size_t i = 0; i < this->_size; i++)
 		this->_vector[i] *= scalar;
 }
 
