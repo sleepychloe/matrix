@@ -1,0 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Complex.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/13 15:54:24 by yhwang            #+#    #+#             */
+/*   Updated: 2024/04/13 16:46:48 by yhwang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef COMPLEX_HPP
+# define COMPLEX_HPP
+
+#include <iostream>
+
+template <typename K>
+class Complex
+{
+public:
+	Complex(const K &real, const K &imag);
+	Complex(const Complex<K> &complex);
+	Complex &operator=(const Complex<K> &complex);
+	~Complex();
+
+	Complex<K>	operator+(const Complex<K> &complex) const;
+	Complex<K>	operator-(const Complex<K> &complex) const;
+	Complex<K>	operator*(const K &num) const;
+	Complex<K>	operator/(const K &num) const;
+	Complex<K>	operator*(const Complex<K> &complex) const;
+	Complex<K>	operator/(const Complex<K> &complex) const;
+
+	K				getReal(void) const;
+	K				getImag(void) const;
+	void				setComplex(const K &real, const K &imag);
+
+	Complex<K>			conjugate(void) const;
+
+private:
+	Complex();
+
+	K				_real;
+	K				_imag;
+};
+
+template <typename K>
+std::ostream	&operator<<(std::ostream &ostream, const Complex<K> &complex);
+
+#include "../srcs/Complex.cpp"
+
+#endif
