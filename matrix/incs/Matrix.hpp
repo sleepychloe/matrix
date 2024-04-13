@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:09 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/12 01:44:18 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/12 23:36:48 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ private:
 	std::vector<std::vector<K>>	minor(size_t m, size_t n) const;
 	K				cofactor(size_t r, size_t c) const;
 };
+
+template <typename K>
+Matrix<K>			projection(K fov, K ratio, K near, K far);
 
 template <typename K>
 std::ostream	&operator<<(std::ostream &ostream, const Matrix<K> &matrix);

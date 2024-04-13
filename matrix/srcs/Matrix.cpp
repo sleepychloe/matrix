@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/12 01:59:35 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/13 06:56:03 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -405,6 +405,20 @@ size_t	Matrix<K>::rank(void) const
 		tmp = 0;
 	}
 	return (res);
+}
+
+template <typename K>
+Matrix<K>	projection(K fov, K ratio, K near, K far)
+{
+	std::vector<std::vector<K>>	res(4, std::vector<K>(4));
+	K	scale = 1 / std::tan(fov / 2 * M_PI / 180);
+
+	res[0][0] = scale; // x coordinates of the projected point
+	res[1][1] = scale / ratio; //  y coordinates of the projected point
+	res[2][2] = -1 * far / (far - near); // remap z to [0,1]: 0(near)
+	res[3][2] = -1 * far * near / (far - near); // remap z to [0,1]: 1(far)
+	res[2][3] = -1; //set w = -z
+	return (Matrix<K>(res));
 }
 
 template <typename K>
