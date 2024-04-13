@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:04:41 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/13 17:03:19 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/13 19:17:17 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ Complex<K>	Complex<K>::operator+(const Complex<K> &complex) const
 {
 	K	real = this->_real + complex.getReal();
 	K	imag = this->_imag + complex.getImag();
-	return (setComplex(real, imag));
+	return (Complex<K>(real, imag));
 }
 
 template <typename K>
@@ -51,37 +51,107 @@ Complex<K>	Complex<K>::operator-(const Complex<K> &complex) const
 {
 	K	real = this->_real - complex.getReal();
 	K	imag = this->_imag - complex.getImag();
-	return (setComplex(real, imag));
+	return (Complex<K>(real, imag));
 }
 
 template <typename K>
 Complex<K>	Complex<K>::operator*(const K &num) const
 {
-	return (setComplex(this->_real * num, this->_imag * num));
+	return (Complex<K>(this->_real * num, this->_imag * num));
 }
 
 template <typename K>
 Complex<K>	Complex<K>::operator/(const K &num) const
 {
-	return (setComplex(this->_real / num, this->_imag / num));
+	return (Complex<K>(this->_real / num, this->_imag / num));
 }
 
 template <typename K>
 Complex<K>	Complex<K>::operator*(const Complex<K> &complex) const
 {
 	K	real = this->_real * complex.getReal() - this->_imag * complex.getImag();
-	K	imag = this->_real * complex.getImag() - this->_imag * complex.getReal();
-	return (setComplex(real, imag));
+	K	imag = this->_real * complex.getImag() + this->_imag * complex.getReal();
+	return (Complex<K>(real, imag));
 }
 
 template <typename K>
 Complex<K>	Complex<K>::operator/(const Complex<K> &complex) const
 {
-K	denominator = complex.getReal() * complex.getReal()
+	K	denominator = complex.getReal() * complex.getReal()
 				+ complex.getImag() * complex.getImag();
 	K	real = this->_real * complex.getReal() + this->_imag * complex.getImag();
 	K	imag = -1 * this->_real * complex.getImag() + this->_imag * complex.getReal();
-	return (setComplex(real / denominator, imag / denominator));
+	return (Complex<K>(real / denominator, imag / denominator));
+}
+
+template <typename K>
+Complex<K>	&Complex<K>::operator+=(const K &num)
+{
+	this->_real += num;
+	return (*this);
+}
+
+template <typename K>
+Complex<K>	&Complex<K>::operator-=(const K &num)
+{
+	this->_real -= num;
+	return (*this);
+}
+
+template <typename K>
+Complex<K>	&Complex<K>::operator*=(const K &num)
+{
+	this->_real *= num;
+	this->_imag *= num;
+	return (*this);
+}
+
+template <typename K>
+Complex<K>	&Complex<K>::operator/=(const K &num)
+{
+	this->_real /= num;
+	this->_imag /= num;
+	return (*this);
+}
+
+template <typename K>
+Complex<K>	&Complex<K>::operator+=(const Complex<K> &complex)
+{
+	this->_real += complex.getReal();
+	this->_imag += complex.getImag();
+	return (*this);
+}
+
+template <typename K>
+Complex<K>	&Complex<K>::operator-=(const Complex<K> &complex)
+{
+	this->_real -= complex.getReal();
+	this->_imag -= complex.getImag();
+	return (*this);
+}
+
+template <typename K>
+Complex<K>	&Complex<K>::operator*=(const Complex<K> &complex)
+{
+	K	real = this->_real * complex.getReal() - this->_imag * complex.getImag();
+	K	imag = this->_real * complex.getImag() + this->_imag * complex.getReal();
+
+	this->_real = real;
+	this->_imag = imag;
+	return (*this);
+}
+
+template <typename K>
+Complex<K>	&Complex<K>::operator/=(const Complex<K> &complex)
+{
+	K	denominator = complex.getReal() * complex.getReal()
+				+ complex.getImag() * complex.getImag();
+	K	real = this->_real * complex.getReal() + this->_imag * complex.getImag();
+	K	imag = -1 * this->_real * complex.getImag() + this->_imag * complex.getReal();
+
+	this->_real = real / denominator;
+	this->_imag = imag / denominator;
+	return (*this);
 }
 
 template <typename K>
@@ -97,13 +167,6 @@ K	Complex<K>::getImag(void) const
 }
 
 template <typename K>
-void	Complex<K>::setComplex(const K &real, const K &imag)
-{
-	this->_real = real;
-	this->_imag = imag;
-}
-
-template <typename K>
 Complex<K> Complex<K>::conjugate(void) const
 {
 	K	real;
@@ -112,20 +175,28 @@ Complex<K> Complex<K>::conjugate(void) const
 	real = this->_real;
 	imag = -1 * this->_imag;
 
-	return  (complex<K>(real, imag));
+	return  (Complex<K>(real, imag));
 }
 
 template <typename K>
 std::ostream	&operator<<(std::ostream &ostream, const Complex<K> &complex)
 {
-	if (real != 0)
+	if (complex.getReal() != 0 || (complex.getReal() == 0 && complex.getImag() == 0))
 		ostream << complex.getReal();
-	if (complex != 0)
+	if (complex.getImag() != 0)
 	{
-		if (complex > 0)
-			ostream << " + " << complex.getImag() << "i";
+		if (complex.getImag() > 0)
+		{
+			if (complex.getReal() != 0)
+				ostream << "+";
+			ostream << complex.getImag() << "i";
+		}
 		else
-			ostream << " - " << -1 * complex.getImag() << "i";
+		{
+			if (complex.getReal() != 0)
+				ostream << "-";
+			ostream << -1 * complex.getImag() << "i";
+		}
 	}
 	return (ostream);
 }

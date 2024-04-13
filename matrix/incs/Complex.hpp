@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:54:24 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/13 16:46:48 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/13 19:16:37 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,17 @@ public:
 	Complex<K>	operator/(const K &num) const;
 	Complex<K>	operator*(const Complex<K> &complex) const;
 	Complex<K>	operator/(const Complex<K> &complex) const;
+	Complex<K>	&operator+=(const K &num);
+	Complex<K>	&operator-=(const K &num);
+	Complex<K>	&operator*=(const K &num);
+	Complex<K>	&operator/=(const K &num);
+	Complex<K>	&operator+=(const Complex<K> &complex);
+	Complex<K>	&operator-=(const Complex<K> &complex);
+	Complex<K>	&operator*=(const Complex<K> &complex);
+	Complex<K>	&operator/=(const Complex<K> &complex);
 
 	K				getReal(void) const;
 	K				getImag(void) const;
-	void				setComplex(const K &real, const K &imag);
 
 	Complex<K>			conjugate(void) const;
 
