@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 20:48:28 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/09 03:20:08 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/14 03:27:12 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(void)
 		std::cout << MAGENTA << "v5: " << BLACK << std::endl << v5 << std::endl;
 		std::cout << MAGENTA << "v6: " << BLACK << std::endl << v6 << std::endl;
 		std::cout << MAGENTA << "liner interpolation v5, v6 and 0.3: " << BLACK << std::endl;
-		std::cout << lerp(v5, v6	, 0.3f) << std::endl;
+		std::cout << lerp(v5, v6, 0.3f) << std::endl;
 		std::cout << std::endl;
 
 		std::cout << CYAN << "[ ex06 ]" << BLACK << std::endl;
@@ -123,8 +123,8 @@ int	main(void)
 		std::cout << std::endl;
 		
 		std::cout << CYAN << "[ 4 by 4 matrices ]" << BLACK << std::endl;
-		Matrix<float>	m3({{11., 12., 13., 14.}, {15., 16., 17., 18.}, {19., 20., 21., 22.}, {23., 24., 25., 26}});
-		Matrix<float>	m4({{12., 13., 14., 15.}, {16., 17., 18., 19.}, {20., 21., 22., 23.}, {24., 25., 26., 27}});
+		Matrix<float>	m3({{11., 12., 13., 14.}, {15., 16., 17., 18.}, {19., 20., 21., 22.}, {23., 24., 25., 26.}});
+		Matrix<float>	m4({{12., 13., 14., 15.}, {16., 17., 18., 19.}, {20., 21., 22., 23.}, {24., 25., 26., 27.}});
 		std::cout << MAGENTA << "m3: " << BLACK << std::endl << m3 << std::endl;
 		std::cout << MAGENTA << "m4: " << BLACK << std::endl << m4 << std::endl;
 		std::cout << MAGENTA << "liner interpolation m3, m4 and 0.4: " << BLACK << std::endl;

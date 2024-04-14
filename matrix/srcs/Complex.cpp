@@ -6,15 +6,22 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:04:41 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/13 20:58:05 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/14 03:06:36 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/Complex.hpp"
 
 template <typename K>
-Complex<K>::Complex(const K &real, const K &imag): _real(real), _imag(imag)
+Complex<K>::Complex(): _real(0), _imag(0)
 {
+}
+
+template <typename K>
+Complex<K>::Complex(const K &real, const K &imag): _real(0), _imag(0)
+{
+	this->_real = real;
+	this->_imag = imag;
 }
 
 template <typename K>
