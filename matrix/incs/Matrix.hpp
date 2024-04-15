@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:09 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/15 20:13:52 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/15 21:48:36 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "./Vector.hpp"
 #include "./Complex.hpp"
 
-# define EPSILON			1e-10
+# define EPSILON			1e-7
 
 template <typename K>
 class Matrix
@@ -44,6 +44,8 @@ public:
 	Matrix<K>			mul_mat(const Matrix<K> &matrix) const;
 	K				trace(void) const;
 	Matrix<K>			transpose(void) const;
+	Matrix<K>			conjugate(void) const;
+	Matrix<K>			conjugateTranspose(void) const;
 	Matrix<K>			row_echelon(void) const;
 	Matrix<K>			minor(size_t m, size_t n) const;
 	K				determinant(void) const;

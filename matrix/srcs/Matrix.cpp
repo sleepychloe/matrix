@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/15 20:30:51 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/15 22:13:42 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,30 @@ Matrix<K>	Matrix<K>::transpose(void) const
 	return (Matrix<K>(res));
 }
 
+template <typename K>
+Matrix<K>	Matrix<K>::conjugate(void) const
+{
+	std::vector<std::vector<K>>	res = this->_matrix;
+
+	if constexpr (!std::is_arithmetic<K>::value)
+	{
+		for (size_t r = 0; r < this->_row; r++)
+		{
+			for (size_t c = 0; c < this->_row; c++)
+				res[r][c] = res[r][c].conj();
+		}
+	}
+	return (Matrix<K>(res));
+}
+
+template <typename K>
+Matrix<K>	Matrix<K>::conjugateTranspose(void) const
+{
+	Matrix<K>	res(this->_matrix);
+	
+	return (res.conjugate().transpose());
+}
+
 /* row operation 1: swap two row
 	ex) rowOperation_1(m, r1, r2) swaps m[r1] and m[r2] */
 template <typename K>
@@ -252,9 +276,13 @@ Matrix<K>	Matrix<K>::row_echelon(void) const
 	{
 		for (size_t c = 0; c < this->_column; c++)
 		{
-			// pvt[r] = 0;
-			if (-1 * EPSILON < res[r][c] && res[r][c] < EPSILON)
-				res[r][c] = 0;
+			if (res[r][c] != 0 && -1 * EPSILON < res[r][c] && res[r][c] < EPSILON)
+			{
+				if constexpr (std::is_arithmetic<K>::value)
+					res[r][c] = 0;
+				else
+					res[r][c] = K();
+			}
 			if (res[r][c] != 0)
 				break ;
 			if ((c == 0 && this->_column > 1) || (c > 0 && res[r][c - 1] == 0))
@@ -278,13 +306,23 @@ Matrix<K>	Matrix<K>::row_echelon(void) const
 			for (size_t i = 0; i < r; i++)
 			{
 				if (pvt[i] != this->_column && res[i][pvt[i]] != 0)
-					rowOperation_3(&res, r, -1 * res[r][pvt[i]] / res[i][pvt[i]], i);
+				{
+					if constexpr (std::is_arithmetic<K>::value)
+						rowOperation_3(&res, r, -1 * res[r][pvt[i]] / res[i][pvt[i]], i);
+					else
+						rowOperation_3(&res, r, K(-1, 0) * res[r][pvt[i]] / res[i][pvt[i]], i);
+				}
 				pvt[r] = 0;
 				setPivot(r);
 			}
 		}
 		if (pvt[r] != this->_column && res[r][pvt[r]] != 0)
-			rowOperation_2(&res, r, 1 / res[r][pvt[r]]);
+		{
+			if constexpr (std::is_arithmetic<K>::value)
+				rowOperation_2(&res, r, 1 / res[r][pvt[r]]);
+			else
+				rowOperation_2(&res, r, K(1, 0) / res[r][pvt[r]]);
+		}
 	}
 
 	/* reduced row echelon form */
@@ -293,7 +331,33 @@ Matrix<K>	Matrix<K>::row_echelon(void) const
 		for (size_t i = 0; i < this->_row; i++)
 		{
 			if (i != r && pvt[r] != this->_column && res[r][pvt[r]] != 0)
-				rowOperation_3(&res, i, -1 * res[i][pvt[r]] / res[r][pvt[r]], r);
+			{
+				if constexpr (std::is_arithmetic<K>::value)
+					rowOperation_3(&res, i, -1 * res[i][pvt[r]] / res[r][pvt[r]], r);
+				else
+					rowOperation_3(&res, i, K(-1, 0) * res[i][pvt[r]] / res[r][pvt[r]], r);
+			}
+		}
+	}
+
+	/* rounding res[r][c] to the nearest integer
+		if they are close to being integers within a epsilon range */
+	for (size_t r = 0; r < this->_row; r++)
+	{
+		for (size_t c = 0; c < this->_column; c++)
+		{
+			if constexpr (std::is_arithmetic<K>::value)
+			{
+				if (res[r][c] != 0 && -1 * EPSILON < res[r][c] - (int)(res[r][c]) && res[r][c] - (int)(res[r][c]) < EPSILON)
+						res[r][c] = (int)res[r][c];
+			}
+			else
+			{
+				if (res[r][c].real() != 0 && -1 * EPSILON < res[r][c].real() - (int)(res[r][c].real()) && res[r][c].real() - (int)(res[r][c].real()) < EPSILON)
+					res[r][c] = K((int)(res[r][c].real()), res[r][c].imag());
+				if (res[r][c].imag() != 0 && -1 * EPSILON < res[r][c].imag() - (int)(res[r][c].imag()) && res[r][c].imag() - (int)(res[r][c].imag()) < EPSILON)
+					res[r][c] = K(res[r][c].real(), (int)(res[r][c].imag()));
+			}
 		}
 	}
 	return (Matrix<K>(res));

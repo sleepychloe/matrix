@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:30 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/15 01:57:23 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/15 22:00:03 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ public:
 	K				norm_1(void) const;
 	K				norm(void) const;
 	K				norm_inf(void) const;
-	
+	Vector<K>			conjugate(void) const;
 	
 private:
 	Vector();

@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:55:36 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/15 05:39:56 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/15 21:09:56 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,19 @@ K	Vector<K>::norm_inf(void) const
 		}
 		return (res);
 	}
+}
+
+template <typename K>
+Vector<K>	Vector<K>::conjugate(void) const
+{
+	std::vector<K>	res = this->_vector;
+
+	if constexpr (!std::is_arithmetic<K>::value)
+	{
+		for (size_t i = 0; i < this->_size; i++)
+			res[i] = res[i].conj();
+	}
+	return (res);
 }
 
 template <typename K>
