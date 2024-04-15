@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 07:14:24 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/15 05:49:29 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/15 20:17:58 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ Vector<K>	lerp(const Vector<K> &u, const Vector<K> &v, const K t)
 	}
 	std::vector<K>	res(u.getSize());
 	for (size_t i = 0; i < u.getSize(); i++)
-		res[i] += (v.getVector()[i] - u.getVector()[i]) * t;
+		res[i] += u.getVector()[i] + (v.getVector()[i] - u.getVector()[i]) * t;
 	return (Vector<K>(res));
 }
 
@@ -71,7 +71,7 @@ Matrix<K>	lerp(const Matrix<K> &u, const Matrix<K> &v, const K t)
 	for (size_t r = 0; r < u.getRowSize(); r++)
 	{
 		for (size_t c = 0; c < u.getColumnSize(); c++)
-			res[r][c] = (v.getMatrix()[r][c] - u.getMatrix()[r][c]) * t;
+			res[r][c] = u.getMatrix()[r][c] + (v.getMatrix()[r][c] - u.getMatrix()[r][c]) * t;
 	}
 	return (Matrix<K>(res));
 }

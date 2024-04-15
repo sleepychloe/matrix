@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 20:57:15 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/12 02:13:39 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/15 17:25:05 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(void)
 	std::cout << YELLOW << "[ test 02 ]" << BLACK << std::endl;
 	{
 		std::cout << CYAN << "[ 4 by 3 matrix * 3d vector ]" << BLACK << std::endl;
-		Matrix<float>	m1({{1., 5., 9.}, {2., 6., 10.}, {3., 7., 11.}, {4., 8., 12}});
+		Matrix<float>	m1({{1., 5., 9.}, {2., 6., 10.}, {3., 7., 11.}, {4., 8., 12.}});
 		Vector<float>	v1({1., 2., 3.});
 		std::cout << MAGENTA << "m1: " << BLACK << std::endl << m1 << std::endl;
 		std::cout << MAGENTA << "v1: " << BLACK << std::endl << v1 << std::endl;

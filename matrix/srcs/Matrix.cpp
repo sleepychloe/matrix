@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/15 05:49:14 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/15 20:30:51 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,12 @@ K	Matrix<K>::trace(void) const
 		throw (msg);
 	}
 
-	K	res = 0;
+	K	res;
+
+	if constexpr (std::is_arithmetic<K>::value)
+		res = 0;
+	else
+		res = K();
 
 	for (size_t r = 0; r < this->_row; r++)
 	{
@@ -295,10 +300,16 @@ Matrix<K>	Matrix<K>::row_echelon(void) const
 }
 
 template <typename K>
-std::vector<std::vector<K>>	Matrix<K>::minor(size_t m, size_t n) const
+Matrix<K>	Matrix<K>::minor(size_t m, size_t n) const
 {
 	size_t	m_r = 0;
 	size_t	m_c = 0;
+	
+	if (m >= this->_row || n >= this->_column)
+	{
+		std::string	msg = "error: invalid row or column";
+		throw (msg);
+	}
 
 	std::vector<std::vector<K>>	res(this->_row - 1, std::vector<K>(this->_row - 1));
 
@@ -316,20 +327,7 @@ std::vector<std::vector<K>>	Matrix<K>::minor(size_t m, size_t n) const
 			m_r++;
 		m_c = 0;
 	}
-	return (res);
-}
-
-template <typename K>
-K	Matrix<K>::cofactor(size_t r, size_t c) const
-{
-	if (getRowSize() == 1)
-		return (this->_matrix[0][0]);
-
-	Matrix<K>	m = minor(r, c);
-	K		res;
-
-	res = (((r + c) % 2 == 0 ? 1 : -1)) * m.determinant();
-	return (res);
+	return (Matrix<K>(res));
 }
 
 template <typename K>
@@ -347,8 +345,28 @@ K	Matrix<K>::determinant(void) const
 	K	res = 0;
 
 	for (size_t c = 0; c < this->_column; c++)
-		res += this->_matrix[0][c] * cofactor(0, c);
+		res += (c % 2 == 0 ? 1: -1) * this->_matrix[0][c] * minor(0, c).determinant();
 	return (res);
+}
+
+template <typename K>
+Matrix<K>	Matrix<K>::cofactor(void) const
+{
+	K		co;
+
+	if (getRowSize() == 1)
+		return (Matrix<K>{{{this->_matrix[0][0]}}});
+
+	std::vector<std::vector<K>>	res(this->_row, std::vector<K>(this->_column));
+	for (size_t r = 0; r < this->_row; r++)
+	{
+		for (size_t c = 0; c < this->_column; c++)
+		{
+			co = (r + c) % 2 == 0 ? 1 : -1;
+			res[r][c] += co * minor(r, c).determinant();
+		}
+	}
+	return (Matrix<K>(res));
 }
 
 template <typename K>
@@ -360,6 +378,9 @@ Matrix<K>	Matrix<K>::inverse(void) const
 		throw (msg);
 	}
 
+	if (getRowSize() == 1)
+		return (Matrix<K>{{{1 / this->_matrix[0][0]}}});
+
 	K	det = determinant();
 
 	if (det == 0)
@@ -368,18 +389,7 @@ Matrix<K>	Matrix<K>::inverse(void) const
 		throw (msg);
 	}
 
-	std::vector<std::vector<K>>	cofactor_matrix(this->_row, std::vector<K>(this->_column));
-
-	if (getRowSize() == 1)
-		return (Matrix<K>{{{1 / this->_matrix[0][0]}}});
-
-	for (size_t r = 0; r < this->_row; r++)
-	{
-		for (size_t c = 0; c < this->_column; c++)
-			cofactor_matrix[r][c] = cofactor(r, c);
-	}
-
-	Matrix<K>	res = Matrix<K>(cofactor_matrix).transpose();
+	Matrix<K>	res = cofactor().transpose();
 
 	res.scale(1 / det);
 	return (res);

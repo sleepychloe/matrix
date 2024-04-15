@@ -1,0 +1,169 @@
+[33m[ test 01: examples on the subject ][0m
+[36m[ ex01 ][0m
+[35mm1: [0m
+[ 1 0 0
+  0 1 0
+  0 0 1 ]
+[35mrow-echelon form of m1: [0m
+[ 1 0 0
+  0 1 0
+  0 0 1 ]
+
+[36m[ ex02 ][0m
+[35mm2: [0m
+[ 1 2
+  3 4 ]
+[35mrow-echelon form of m2: [0m
+[ 1 0
+  0 1 ]
+
+[36m[ ex03 ][0m
+[35mm3: [0m
+[ 1 2
+  2 4 ]
+[35mrow-echelon form of m3: [0m
+[ 1 2
+  0 0 ]
+
+[36m[ ex04 ][0m
+[35mm4: [0m
+[ 8 5 -2 4 28
+  4 2.5 20 4 -4
+  8 5 1 4 17 ]
+[35mrow-echelon form of m4: [0m
+[ 1 0.625 0 0 -12.1667
+  0 0 1 0 -3.66667
+  0 0 0 1 29.5 ]
+
+
+[33m[ test 02 ][0m
+[36m[ 1 by 1 matrix ][0m
+[35mm1: [0m
+[ 7 ]
+[35mrow-echelon form of m1: [0m
+[ 1 ]
+
+[36m[ 1 by 2 matrix ][0m
+[35mm2: [0m
+[ 2 3 ]
+[35mrow-echelon form of m2: [0m
+[ 1 1.5 ]
+
+[36m[ 1 by 3 matrix ][0m
+[35mm3: [0m
+[ 4 -3 8 ]
+[35mrow-echelon form of m3: [0m
+[ 1 -0.75 2 ]
+
+[36m[ 1 by 4 matrix ][0m
+[35mm4: [0m
+[ 4 -3 8 2 ]
+[35mrow-echelon form of m4: [0m
+[ 1 -0.75 2 0.5 ]
+
+
+[33m[ test 03 ][0m
+[36m[ 2 by 1 matrix ][0m
+[35mm1: [0m
+[ 7
+  -8 ]
+[35mrow-echelon form of m1: [0m
+[ 1
+  0 ]
+
+[36m[ 2 by 2 matrix ][0m
+[35mm2: [0m
+[ 3 8
+  -7 6 ]
+[35mrow-echelon form of m2: [0m
+[ 1 0
+  0 1 ]
+
+[36m[ 2 by 3 matrix ][0m
+[35mm3: [0m
+[ 11 -13 2.9
+  -3.9 22 12 ]
+[35mrow-echelon form of m3: [0m
+[ 1 0 1.14898
+  0 1 0.749137 ]
+
+[36m[ 2 by 4 matrix ][0m
+[35mm4: [0m
+[ 4 -3 2 -1
+  -11 22 -33 44 ]
+[35mrow-echelon form of m4: [0m
+[ 1 0 -1 2
+  0 1 -2 3 ]
+
+[36m[ 2 by 5 matrix ][0m
+[35mm5: [0m
+[ 4 -3 2 -1 3.1
+  -11 22 -33 44 -3.4 ]
+[35mrow-echelon form of m5: [0m
+[ 1 0 -1 2 1.05455
+  0 1 -2 3 0.372727 ]
+
+
+[33m[ test 04 ][0m
+[36m[ 3 by 1 matrix ][0m
+[35mm1: [0m
+[ 7
+  -8
+  2 ]
+[35mrow-echelon form of m1: [0m
+[ 1
+  0
+  0 ]
+
+[36m[ 3 by 2 matrix ][0m
+[35mm2: [0m
+[ 3 1.4
+  -22 -7
+  32.1 76.4 ]
+[35mrow-echelon form of m2: [0m
+[ 1 0
+  0 1
+  0 0 ]
+
+[36m[ 3 by 3 matrix ][0m
+[35mm3: [0m
+[ 112 -13 2.9
+  -3.9 242 12
+  87 76.3 98 ]
+[35mrow-echelon form of m3: [0m
+[ 1 0 0
+  0 1 0
+  0 0 1 ]
+
+[36m[ 3 by 4 matrix ][0m
+[35mm4: [0m
+[ 3 -88 21 38
+  -151 212 -3.2 0.6
+  72.5 8 98.2 55 ]
+[35mrow-echelon form of m4: [0m
+[ 1 0 0 -0.361758
+  0 1 0 -0.242054
+  0 0 1 0.846882 ]
+
+[36m[ 3 by 5 matrix ][0m
+[35mm5: [0m
+[ 3 -88 21 38 33
+  -151 212 -3.2 0.6 2.1
+  72.5 8 98.2 55 333 ]
+[35mrow-echelon form of m5: [0m
+[ 1 0 0 -0.361758 0.434625
+  0 1 0 -0.242054 0.365365
+  0 0 1 0.846882 3.04039 ]
+
+[36m[ 3 by 6 matrix ][0m
+[35mm6: [0m
+[ 3 2.2 -88 21 38 33
+  -151 -1.6 212 -3.2 0.6 2.1
+  121 72.5 8 98.2 55 333 ]
+[35mrow-echelon form of m6: [0m
+[ 1 0 0 -0.282077 -0.594689 -0.430156
+  0 1 0 1.84756 1.79607 5.33929
+  0 0 1 -0.202064 -0.40719 -0.256182 ]
+
+to check the answers:
+https://www.emathhelp.net/en/calculators/linear-algebra/reduced-row-echelon-form-rref-calculator/

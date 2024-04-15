@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:45:44 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/15 05:43:56 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/15 20:36:34 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -527,10 +527,73 @@ int	main(void)
 		std::cout << v4.dot(corss_product(v3, v4)) << BLACK << std::endl;
 		std::cout << std::endl;
 	}
-	// std::cout << std::endl;
-	// std::cout << YELLOW << "[ ex07: linear map, matrix multiplication ]" << BLACK << std::endl;
-	// {
+	std::cout << std::endl;
+	std::cout << YELLOW << "[ ex07: linear map, matrix multiplication ]" << BLACK << std::endl;
+	{
+		std::cout << CYAN << "[ 4 by 3 matrix * 3d vector ]" << BLACK << std::endl;
+		Matrix<Complex<float>>	m1({{Complex<float>(1., -1), Complex<float>(5., -5.), Complex<float>(9., -9.)},
+					{Complex<float>(-2., 2), Complex<float>(-6., 6.), Complex<float>(-10., -10.)},
+					{Complex<float>(3., 3), Complex<float>(7., 7.), Complex<float>(11., 11.)},
+					{Complex<float>(-4., -4.), Complex<float>(-8., -8.), Complex<float>(-12., -12.)}});
+		Vector<Complex<float>>	v1({Complex<float>(1., 11.), Complex<float>(2., 22.), Complex<float>(3., 33.)});
+		std::cout << MAGENTA << "m1: " << BLACK << std::endl << m1 << std::endl;
+		std::cout << MAGENTA << "v1: " << BLACK << std::endl << v1 << std::endl;
+		std::cout << MAGENTA << "m1 * v1: " << BLACK << std::endl;
+		std::cout << m1.mul_vec(v1) << std::endl;
+		std::cout << std::endl;
+
+		std::cout << CYAN << "[ 4 by 3 matrix * 3 by 4 matrix ]" << BLACK << std::endl;
+		Matrix<Complex<float>>	m2({{Complex<float>(-1., -1), Complex<float>(-4., -4), Complex<float>(-7., -7), Complex<float>(-10., -10)},
+					{Complex<float>(2., 2.), Complex<float>(5., 5.), Complex<float>(8., 8.), Complex<float>(11., 11.)}, 
+					{Complex<float>(3., -3), Complex<float>(-6., 6), Complex<float>(9., -9.), Complex<float>(-12., 12.)}});
+		std::cout << MAGENTA << "m1: " << BLACK << std::endl << m1 << std::endl;
+		std::cout << MAGENTA << "m2: " << BLACK << std::endl << m2 << std::endl;
+		std::cout << MAGENTA << "m1 * m2: " << BLACK << std::endl;
+		std::cout << m1.mul_mat(m2) << std::endl;
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+	std::cout << YELLOW << "[ ex08: trace ]" << BLACK << std::endl;
+	{
+		std::cout << CYAN << "[ 2 by 2 matrix ]" << BLACK << std::endl;
+		Matrix<Complex<float>>	m1({{Complex<float>(0., 1.), Complex<float>(0., 0.)},
+					{Complex<float>(0., 0.), Complex<float>(0., 1.)}});
+		std::cout << MAGENTA << "m1: " << BLACK << std::endl << m1 << std::endl;
+		std::cout << MAGENTA << "Tr(m1): " << BLACK << std::endl;
+		std::cout << m1.trace() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << CYAN << "[ 3 by 3 matrix ]" << BLACK << std::endl;
+		Matrix<Complex<float>>	m2({{Complex<float>(1., -1), Complex<float>(2., -2.), Complex<float>(3., -3.)},
+					{Complex<float>(-4., 4), Complex<float>(-5., 5.), Complex<float>(-6., -6.)},
+					{Complex<float>(7., 7), Complex<float>(8., 8.), Complex<float>(9., 9.)},});
+		std::cout << MAGENTA << "m2: " << BLACK << std::endl << m2 << std::endl;
+		std::cout << MAGENTA << "Tr(m2): " << BLACK << std::endl;
+		std::cout << m2.trace() << std::endl;
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+	std::cout << YELLOW << "[ ex09: transpose ]" << BLACK << std::endl;
+	{
+		std::cout << CYAN << "[ 2 by 2 matrix ]" << BLACK << std::endl;
+		Matrix<Complex<float>>	m1({{Complex<float>(1., 1.), Complex<float>(2., 2.)},
+					{Complex<float>(3., 3.), Complex<float>(4., 4.)}});
+		std::cout << MAGENTA << "m1: " << BLACK << std::endl << m1 << std::endl;
+		std::cout << MAGENTA << "m1ᵀ: " << BLACK << std::endl;
+		std::cout << m1.transpose() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << CYAN << "[ 3 by 3 matrix ]" << BLACK << std::endl;
+		Matrix<Complex<float>>	m2({{Complex<float>(1., 1.), Complex<float>(2., 2.), Complex<float>(3., 3.)},
+					{Complex<float>(4., 4.), Complex<float>(5., 5.), Complex<float>(6., 6.)},
+					{Complex<float>(7., 7.), Complex<float>(8., 8.), Complex<float>(9., 9.)}});
+		std::cout << MAGENTA << "m2: " << BLACK << std::endl << m2 << std::endl;
+		std::cout << MAGENTA << "m2ᵀ: " << BLACK << std::endl;
+		std::cout << m2.transpose() << std::endl;
+		std::cout << std::endl;
+		//conjugate, conjugate transpose
+
 		
-	// }
+	}
 	return (0);
 }

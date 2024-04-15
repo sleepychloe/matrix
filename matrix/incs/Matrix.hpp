@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:09 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/14 18:02:05 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/15 20:13:52 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ public:
 	K				trace(void) const;
 	Matrix<K>			transpose(void) const;
 	Matrix<K>			row_echelon(void) const;
+	Matrix<K>			minor(size_t m, size_t n) const;
 	K				determinant(void) const;
+	Matrix<K>			cofactor(void) const;
 	Matrix<K>			inverse(void) const;
 	size_t				rank(void) const;
 
@@ -59,8 +61,6 @@ private:
 	void				rowOperation_1(std::vector<std::vector<K>> *m, size_t r1, size_t r2) const;
 	void				rowOperation_2(std::vector<std::vector<K>> *m, size_t r, K k) const;
 	void				rowOperation_3(std::vector<std::vector<K>> *m, size_t r1, K k, size_t r2) const;
-	std::vector<std::vector<K>>	minor(size_t m, size_t n) const;
-	K				cofactor(size_t r, size_t c) const;
 };
 
 template <typename K>
