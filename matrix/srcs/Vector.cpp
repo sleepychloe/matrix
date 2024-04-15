@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 18:55:36 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/13 21:05:26 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/15 05:39:56 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,41 +96,107 @@ K	Vector<K>::dot(const Vector<K> &vector) const
 		throw (msg);
 	}
 
-	K	res = 0;
+	K	res;
 
-	for (size_t i = 0; i < this->_size; i++)
-		res = fma(this->_vector[i], vector.getVector()[i], res);
+	if constexpr (std::is_arithmetic<K>::value)
+	{
+		/* real : Σaₖbₖ */
+		res = 0;
+
+		for (size_t i = 0; i < this->_size; i++)
+			res += this->_vector[i] * vector.getVector()[i];
+	}
+	else
+	{
+		/* complex: Σaₖb̅ₖ */
+		res = K();
+
+		for (size_t i = 0; i < this->_size; i++)
+			res += this->_vector[i] * vector.getVector()[i].conj();
+	}
 	return (res);
 }
 
 template <typename K>
 K	Vector<K>::norm_1(void) const
 {
-	K	res = 0;
+	K	res;
 
-	for (size_t i = 0; i < this->_size; i++)
-		res += pow(pow(this->_vector[i], 2), 0.5);
+	if constexpr (std::is_arithmetic<K>::value)
+	{
+		/* real : Σ|aₖ| */
+		res = 0;
+
+		for (size_t i = 0; i < this->_size; i++)
+			res += pow(pow(this->_vector[i], 2), 0.5);
+	}
+	else
+	{
+		/* complex : Σ|aᵣ|+|aᵢ| */
+		res = K();
+
+		for (size_t i = 0; i < this->_size; i++)
+		{
+			res += pow(pow(this->_vector[i].real(), 2), 0.5);
+			res += pow(pow(this->_vector[i].imag(), 2), 0.5);
+		}
+	}
 	return (res);
 }
 
 template <typename K>
 K	Vector<K>::norm(void) const
 {
-	K	res = 0;
+	K	res;
 
-	for (size_t i = 0; i < this->_size; i++)
-		res += pow(this->_vector[i], 2);
-	return (pow(res, 0.5));
+	if constexpr (std::is_arithmetic<K>::value)
+	{
+		/* real : sqrt(Σaₖ²) */
+		res = 0;
+
+		for (size_t i = 0; i < this->_size; i++)
+			res += pow(this->_vector[i], 2);
+		return (pow(res, 0.5));
+	}
+	else
+	{
+		/* complex : sqrt(Σaᵣ²+aᵢ²) */
+		res = K();
+
+		for (size_t i = 0; i < this->_size; i++)
+			res += pow(this->_vector[i].real(), 2) + pow(this->_vector[i].imag(), 2);
+		return (K(pow(res.real(), 0.5), 0));
+	}
 }
 
 template <typename K>
 K	Vector<K>::norm_inf(void) const
 {
-	K	res = pow(pow(this->_vector[0], 2), 0.5);
-	
-	for (size_t i = 1; i < this->_size; i++)
-		res = pow(std::max(pow(res, 2), pow(this->_vector[i], 2)), 0.5);
-	return (res);
+	K	res;
+
+	if constexpr (std::is_arithmetic<K>::value)
+	{
+		/* real : max(|aₖ|) */
+		res = pow(pow(this->_vector[0], 2), 0.5);
+
+		for (size_t i = 1; i < this->_size; i++)
+			res = pow(std::max(pow(res, 2), pow(this->_vector[i], 2)), 0.5);
+		return (res);
+	}
+	else
+	{
+		/* complex : max(|aₖ|, |aᵢ|) */
+		res = K(pow(pow(this->_vector[0].real(), 2), 0.5), 0);
+
+		for (size_t i = 0; i < this->_size; i++)
+		{
+			if (res.real() < pow(pow(this->_vector[i].real(), 2), 0.5))
+				res = K(pow(pow(this->_vector[i].real(), 2), 0.5), 0);
+			if (res.real() < pow(pow(this->_vector[i].imag(), 2), 0.5))
+				res = K(pow(pow(this->_vector[i].imag(), 2), 0.5), 0);
+		}
+		return (res);
+	}
 }
 
 template <typename K>
@@ -142,9 +208,15 @@ K	angle_cos(const Vector<K> &u, const Vector<K> &v)
 		throw (msg);
 	}
 
-	K	res = 0;
+	K	res;
 
-	res = fma(u.dot(v), 1 / (u.norm() * v.norm()), res);
+	if constexpr (std::is_arithmetic<K>::value)
+		res = u.dot(v) / (u.norm() * v.norm());
+	else
+	{
+		res = K();
+		res = u.dot(v) / (u.norm() * v.norm());
+	}
 	return (res);
 }
 

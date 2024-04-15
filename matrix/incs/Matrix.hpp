@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:09 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/12 23:36:48 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/14 18:02:05 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <string>
 #include <functional>
 #include "./Vector.hpp"
+#include "./Complex.hpp"
 
 # define EPSILON			1e-10
 

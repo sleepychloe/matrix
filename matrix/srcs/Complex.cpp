@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:04:41 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/14 03:06:36 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/15 05:44:57 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,52 +46,6 @@ Complex<K>::~Complex()
 }
 
 template <typename K>
-Complex<K>	Complex<K>::operator+(const Complex<K> &complex) const
-{
-	K	real = this->_real + complex.getReal();
-	K	imag = this->_imag + complex.getImag();
-	return (Complex<K>(real, imag));
-}
-
-template <typename K>
-Complex<K>	Complex<K>::operator-(const Complex<K> &complex) const
-{
-	K	real = this->_real - complex.getReal();
-	K	imag = this->_imag - complex.getImag();
-	return (Complex<K>(real, imag));
-}
-
-template <typename K>
-Complex<K>	Complex<K>::operator*(const K &num) const
-{
-	return (Complex<K>(this->_real * num, this->_imag * num));
-}
-
-template <typename K>
-Complex<K>	Complex<K>::operator/(const K &num) const
-{
-	return (Complex<K>(this->_real / num, this->_imag / num));
-}
-
-template <typename K>
-Complex<K>	Complex<K>::operator*(const Complex<K> &complex) const
-{
-	K	real = this->_real * complex.getReal() - this->_imag * complex.getImag();
-	K	imag = this->_real * complex.getImag() + this->_imag * complex.getReal();
-	return (Complex<K>(real, imag));
-}
-
-template <typename K>
-Complex<K>	Complex<K>::operator/(const Complex<K> &complex) const
-{
-	K	denominator = complex.getReal() * complex.getReal()
-				+ complex.getImag() * complex.getImag();
-	K	real = this->_real * complex.getReal() + this->_imag * complex.getImag();
-	K	imag = -1 * this->_real * complex.getImag() + this->_imag * complex.getReal();
-	return (Complex<K>(real / denominator, imag / denominator));
-}
-
-template <typename K>
 Complex<K>	&Complex<K>::operator+=(const K &num)
 {
 	this->_real += num;
@@ -124,24 +78,24 @@ Complex<K>	&Complex<K>::operator/=(const K &num)
 template <typename K>
 Complex<K>	&Complex<K>::operator+=(const Complex<K> &complex)
 {
-	this->_real += complex.getReal();
-	this->_imag += complex.getImag();
+	this->_real += complex.real();
+	this->_imag += complex.imag();
 	return (*this);
 }
 
 template <typename K>
 Complex<K>	&Complex<K>::operator-=(const Complex<K> &complex)
 {
-	this->_real -= complex.getReal();
-	this->_imag -= complex.getImag();
+	this->_real -= complex.real();
+	this->_imag -= complex.imag();
 	return (*this);
 }
 
 template <typename K>
 Complex<K>	&Complex<K>::operator*=(const Complex<K> &complex)
 {
-	K	real = this->_real * complex.getReal() - this->_imag * complex.getImag();
-	K	imag = this->_real * complex.getImag() + this->_imag * complex.getReal();
+	K	real = this->_real * complex.real() - this->_imag * complex.imag();
+	K	imag = this->_real * complex.imag() + this->_imag * complex.real();
 
 	this->_real = real;
 	this->_imag = imag;
@@ -151,10 +105,10 @@ Complex<K>	&Complex<K>::operator*=(const Complex<K> &complex)
 template <typename K>
 Complex<K>	&Complex<K>::operator/=(const Complex<K> &complex)
 {
-	K	denominator = complex.getReal() * complex.getReal()
-				+ complex.getImag() * complex.getImag();
-	K	real = this->_real * complex.getReal() + this->_imag * complex.getImag();
-	K	imag = -1 * this->_real * complex.getImag() + this->_imag * complex.getReal();
+	K	denominator = complex.real() * complex.real()
+				+ complex.imag() * complex.imag();
+	K	real = this->_real * complex.real() + this->_imag * complex.imag();
+	K	imag = -1 * this->_real * complex.imag() + this->_imag * complex.real();
 
 	this->_real = real / denominator;
 	this->_imag = imag / denominator;
@@ -162,19 +116,19 @@ Complex<K>	&Complex<K>::operator/=(const Complex<K> &complex)
 }
 
 template <typename K>
-K	Complex<K>::getReal(void) const
+K	Complex<K>::real(void) const
 {
 	return (this->_real);
 }
 
 template <typename K>
-K	Complex<K>::getImag(void) const
+K	Complex<K>::imag(void) const
 {
 	return (this->_imag);
 }
 
 template <typename K>
-Complex<K> Complex<K>::conjugate(void) const
+Complex<K> Complex<K>::conj(void) const
 {
 	K	real;
 	K	imag;
@@ -188,22 +142,255 @@ Complex<K> Complex<K>::conjugate(void) const
 template <typename K>
 std::ostream	&operator<<(std::ostream &ostream, const Complex<K> &complex)
 {
-	if (complex.getReal() != 0 || (complex.getReal() == 0 && complex.getImag() == 0))
-		ostream << complex.getReal();
-	if (complex.getImag() != 0)
+	if (complex.real() != 0 || (complex.real() == 0 && complex.imag() == 0))
+		ostream << complex.real();
+	if (complex.imag() != 0)
 	{
-		if (complex.getImag() > 0)
+		if (complex.imag() > 0)
 		{
-			if (complex.getReal() != 0)
+			if (complex.real() != 0)
 				ostream << "+";
-			ostream << complex.getImag() << "i";
+			ostream << complex.imag() << "i";
 		}
 		else
-		{
-			if (complex.getReal() != 0)
-				ostream << "-";
-			ostream << -1 * complex.getImag() << "i";
-		}
+			ostream << complex.imag() << "i";
 	}
 	return (ostream);
 }
+
+template <typename K>
+Complex<K>	operator+(const Complex<K> &l, const K &r)
+{
+	K	real = l.real() + r;
+	K	imag = l.imag();
+	return (Complex<K>(real, imag));
+}
+
+template <typename K>
+Complex<K>	operator+(const K &l, const Complex<K> &r)
+{
+	K	real = l + r.real();
+	K	imag = r.imag();
+	return (Complex<K>(real, imag));
+}
+
+template <typename K>
+Complex<K>	operator+(const Complex<K> &l, const Complex<K> &r)
+{
+	K	real = l.real() + r.real();
+	K	imag = l.imag() + r.imag();
+	return (Complex<K>(real, imag));
+}
+
+template <typename K>
+Complex<K>	operator-(const Complex<K> &l, const K &r)
+{
+	K	real = l.real() - r;
+	K	imag = l.imag();
+	return (Complex<K>(real, imag));
+}
+
+template <typename K>
+Complex<K>	operator-(const K &l, const Complex<K> &r)
+{
+	K	real = l - r.real();
+	K	imag = -1 * r.imag();
+	return (Complex<K>(real, imag));
+}
+
+template <typename K>
+Complex<K>	operator-(const Complex<K> &l, const Complex<K> &r)
+{
+	K	real = l.real() - r.real();
+	K	imag = l.imag() - r.imag();
+	return (Complex<K>(real, imag));
+}
+
+template <typename K>
+Complex<K>	operator*(const Complex<K> &l, const K &r)
+{
+	K	real = l.real() * r;
+	K	imag = l.imag() * r;
+	return (Complex<K>(real, imag));
+}
+
+template <typename K>
+Complex<K>	operator*(const K &l, const Complex<K> &r)
+{
+	K	real = l * r.real();
+	K	imag = l * r.imag();
+	return (Complex<K>(real, imag));
+}
+
+template <typename K>
+Complex<K>	operator*(const Complex<K> &l, const Complex<K> &r)
+{
+	K	real = l.real() * r.real() - l.imag() * r.imag();
+	K	imag = l.real() * r.imag() + l.imag() * r.real();
+	return (Complex<K>(real, imag));
+}
+
+template <typename K>
+Complex<K>	operator/(const Complex<K> &l, const K &r)
+{
+	K	real = l.real() / r;
+	K	imag = l.imag() / r;
+	return (Complex<K>(real, imag));
+}
+
+template <typename K>
+Complex<K>	operator/(const K &l, const Complex<K> &r)
+{
+	K	denominator = r.real() * r.real()
+				+ r.imag() * r.imag();
+	K	real = l * r.real();
+	K	imag = -1 * l * r.imag();
+	return (Complex<K>(real / denominator, imag / denominator));
+}
+
+template <typename K>
+Complex<K>	operator/(const Complex<K> &l, const Complex<K> &r)
+{
+	K	denominator = r.real() * r.real()
+				+ r.imag() * r.imag();
+	K	real = l.real() * r.real() + l.imag() * r.imag();
+	K	imag = -1 * l.real() * r.imag() + l.imag() * r.real();
+	return (Complex<K>(real / denominator, imag / denominator));
+}
+
+template <typename K>
+bool		operator==(const Complex<K> &l, const int &r)
+{
+	return (l.real() == r && l.imag() == 0);
+}
+
+template <typename K>
+bool		operator==(const int &l, const Complex<K> &r)
+{
+	return (l == r.real() && r.imag() == 0);
+}
+
+template <typename K>
+bool		operator==(const Complex<K> &l, Complex<K> &r)
+{
+	return (l.real() == r.real() && l.imag() == r.imag());
+}
+
+template <typename K>
+bool		operator!=(const Complex<K> &l, const int &r)
+{
+	return (!(l == r));
+}
+
+template <typename K>
+bool		operator!=(const int &l, const Complex<K> &r)
+{
+	return (!(l == r));
+}
+
+template <typename K>
+bool		operator!=(const Complex<K> &l, Complex<K> &r)
+{
+	return (!(l == r));
+}
+
+template <typename K>
+bool	operator<(const Complex<K> &l, const int &r)
+{
+	K	l_square = l.real() * l.real() + l.imag() * l.imag();
+
+	return (l_square < r * r);
+}
+
+template <typename K>
+bool	operator<(const int &l, const Complex<K> &r)
+{
+	K	r_square = r.real() * r.real() + r.imag() * r.imag();
+
+	return (l * l < r_square);
+}
+
+template <typename K>
+bool	operator<(const Complex<K> &l, Complex<K> &r)
+{
+	K	l_square = l.real() * l.real() + l.imag() * l.imag();
+	K	r_square = r.real() * r.real() + r.imag() * r.imag();
+
+	return (l_square < r_square);
+}
+
+template <typename K>
+bool	operator>(const Complex<K> &l, const int &r)
+{
+	K	l_square = l.real() * l.real() + l.imag() * l.imag();
+
+	return (l_square > r * r);
+}
+
+template <typename K>
+bool	operator>(const int &l, const Complex<K> &r)
+{
+	K	r_square = r.real() * r.real() + r.imag() * r.imag();
+
+	return (l * l > r_square);
+}
+
+template <typename K>
+bool	operator>(const Complex<K> &l, Complex<K> &r)
+{
+	K	l_square = l.real() * l.real() + l.imag() * l.imag();
+	K	r_square = r.real() * r.real() + r.imag() * r.imag();
+
+	return (l_square > r_square);
+}
+
+template <typename K>
+bool	operator<=(const Complex<K> &l, const int &r)
+{
+	K	l_square = l.real() * l.real() + l.imag() * l.imag();
+
+	return (l_square <= r * r);
+}
+
+template <typename K>
+bool	operator<=(const int &l, const Complex<K> &r)
+{
+	K	r_square = r.real() * r.real() + r.imag() * r.imag();
+
+	return (l * l <= r_square);
+}
+
+template <typename K>
+bool	operator<=(const Complex<K> &l, Complex<K> &r)
+{
+	K	l_square = l.real() * l.real() + l.imag() * l.imag();
+	K	r_square = r.real() * r.real() + r.imag() * r.imag();
+
+	return (l_square <= r_square);
+}
+
+template <typename K>
+bool	operator>=(const Complex<K> &l, const int &r)
+{
+	K	l_square = l.real() * l.real() + l.imag() * l.imag();
+
+	return (l_square >= r * r);
+}
+
+template <typename K>
+bool	operator>=(const int &l, const Complex<K> &r)
+{
+	K	r_square = r.real() * r.real() + r.imag() * r.imag();
+
+	return (l * l >= r_square);
+}
+
+template <typename K>
+bool	operator>=(const Complex<K> &l, Complex<K> &r)
+{
+	K	l_square = l.real() * l.real() + l.imag() * l.imag();
+	K	r_square = r.real() * r.real() + r.imag() * r.imag();
+
+	return (l_square >= r_square);
+}
+

@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:54:24 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/14 03:06:40 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/15 05:45:06 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define COMPLEX_HPP
 
 #include <iostream>
+#include <type_traits>
 
 template <typename K>
 class Complex
@@ -25,12 +26,6 @@ public:
 	Complex &operator=(const Complex<K> &complex);
 	~Complex();
 
-	Complex<K>	operator+(const Complex<K> &complex) const;
-	Complex<K>	operator-(const Complex<K> &complex) const;
-	Complex<K>	operator*(const K &num) const;
-	Complex<K>	operator/(const K &num) const;
-	Complex<K>	operator*(const Complex<K> &complex) const;
-	Complex<K>	operator/(const Complex<K> &complex) const;
 	Complex<K>	&operator+=(const K &num);
 	Complex<K>	&operator-=(const K &num);
 	Complex<K>	&operator*=(const K &num);
@@ -38,13 +33,12 @@ public:
 	Complex<K>	&operator+=(const Complex<K> &complex);
 	Complex<K>	&operator-=(const Complex<K> &complex);
 	Complex<K>	&operator*=(const Complex<K> &complex);
-	Complex<K>	&operator/=(const Complex<K> &complex);
-	
+	Complex<K>	&operator/=(const Complex<K> &complex);	
 
-	K				getReal(void) const;
-	K				getImag(void) const;
+	K				real(void) const;
+	K				imag(void) const;
 
-	Complex<K>			conjugate(void) const;
+	Complex<K>			conj(void) const;
 
 private:
 	K				_real;
@@ -53,6 +47,95 @@ private:
 
 template <typename K>
 std::ostream	&operator<<(std::ostream &ostream, const Complex<K> &complex);
+
+template <typename K>
+Complex<K>	operator+(const Complex<K> &l, const K &r);
+
+template <typename K>
+Complex<K>	operator+(const K &l, const Complex<K> &r);
+
+template <typename K>
+Complex<K>	operator+(const Complex<K> &l, const Complex<K> &r);
+
+template <typename K>
+Complex<K>	operator-(const Complex<K> &l, const K &r);
+
+template <typename K>
+Complex<K>	operator-(const K &l, const Complex<K> &r);
+
+template <typename K>
+Complex<K>	operator-(const Complex<K> &l, const Complex<K> &r);
+
+template <typename K>
+Complex<K>	operator*(const Complex<K> &l, const K &r);
+template <typename K>
+Complex<K>	operator*(const K &l, const Complex<K> &r);
+
+template <typename K>
+Complex<K>	operator*(const Complex<K> &l, const Complex<K> &r);
+
+template <typename K>
+Complex<K>	operator/(const Complex<K> &l, const K &r);
+
+template <typename K>
+Complex<K>	operator/(const K &l, const Complex<K> &r);
+
+template <typename K>
+Complex<K>	operator/(const Complex<K> &l, const Complex<K> &r);
+
+template <typename K>
+bool		operator==(const Complex<K> &l, const int &r);
+
+template <typename K>
+bool		operator==(const int &l, const Complex<K> &r);
+
+template <typename K>
+bool		operator==(const Complex<K> &l, Complex<K> &r);
+
+template <typename K>
+bool		operator!=(const Complex<K> &l, const int &r);
+
+template <typename K>
+bool		operator!=(const int &l, const Complex<K> &r);
+
+template <typename K>
+bool		operator!=(const Complex<K> &l, Complex<K> &r);
+
+template <typename K>
+bool		operator<(const Complex<K> &l, const int &r);
+
+template <typename K>
+bool		operator<(const int &l, const Complex<K> &r);
+
+template <typename K>
+bool		operator<(const Complex<K> &l, Complex<K> &r);
+
+template <typename K>
+bool		operator>(const Complex<K> &l, const int &r);
+
+template <typename K>
+bool		operator>(const int &l, const Complex<K> &r);
+
+template <typename K>
+bool		operator>(const Complex<K> &l, Complex<K> &r);
+
+template <typename K>
+bool		operator<=(const Complex<K> &l, const int &r);
+
+template <typename K>
+bool		operator<=(const int &l, const Complex<K> &r);
+
+template <typename K>
+bool		operator<=(const Complex<K> &l, Complex<K> &r);
+
+template <typename K>
+bool		operator>=(const Complex<K> &l, const int &r);
+
+template <typename K>
+bool		operator>=(const int &l, const Complex<K> &r);
+
+template <typename K>
+bool		operator>=(const Complex<K> &l, Complex<K> &r);
 
 #include "../srcs/Complex.cpp"
 

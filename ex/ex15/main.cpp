@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:45:44 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/14 03:35:23 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/15 05:43:56 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,17 @@ int	main(void)
 		std::cout << YELLOW << "[ test 00-04 : overloading * ]" << BLACK << std::endl;
 		std::cout << CYAN << "[ (1, 1) * 2 ]" << BLACK << std::endl;
 		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
-		std::cout << c1 * 2 << std::endl;
+		std::cout << c1 * 2.f << std::endl;
 		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std::cout << "does not support" << std::endl;
+		std::cout << std_c1 * 2.f << std::endl;
 		std::cout << std::endl;
 
 		std::cout << YELLOW << "[ test 00-05 : overloading / ]" << BLACK << std::endl;
 		std::cout << CYAN << "[ (1, 1) / 2 ]" << BLACK << std::endl;
 		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
-		std::cout << c1 / 2 << std::endl;
+		std::cout << c1 / 2.f << std::endl;
 		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std::cout << "does not support" << std::endl;
+		std::cout << std_c1 / 2.f << std::endl;
 		std::cout << std::endl;
 
 		std::cout << YELLOW << "[ test 00-06 : overloading * ]" << BLACK << std::endl;
@@ -389,7 +389,7 @@ int	main(void)
 		std::cout << MAGENTA << "v1: " << BLACK << std::endl << v1 << std::endl;
 		std::cout << MAGENTA << "v2: " << BLACK << std::endl << v2 << std::endl;
 		std::cout << MAGENTA << "liner interpolation v1, v2 and 0.3: " << BLACK << std::endl;
-		std::cout << lerp(v1, v2, 0.3f) << std::endl;
+		std::cout << lerp(v1, v2, Complex<float>(0.3, 0)) << std::endl;
 		std::cout << std::endl;
 
 		std::cout << CYAN << "[ 3d vectors ]" << BLACK << std::endl;
@@ -398,7 +398,7 @@ int	main(void)
 		std::cout << MAGENTA << "v3: " << BLACK << std::endl << v3 << std::endl;
 		std::cout << MAGENTA << "v4: " << BLACK << std::endl << v4 << std::endl;
 		std::cout << MAGENTA << "liner interpolation v3, v4 and 0.65: " << BLACK << std::endl;
-		std::cout << lerp(v3, v4, 0.65f) << std::endl;
+		std::cout << lerp(v3, v4, Complex<float>(0.65, 0)) << std::endl;
 		std::cout << std::endl;
 
 		std::cout << CYAN << "[ 2d matrix ]" << BLACK << std::endl;
@@ -409,7 +409,7 @@ int	main(void)
 		std::cout << MAGENTA << "m1: " << BLACK << std::endl << m1 << std::endl;
 		std::cout << MAGENTA << "m2: " << BLACK << std::endl << m2 << std::endl;
 		std::cout << MAGENTA << "liner interpolation m1, m2 and 0.5: " << BLACK << std::endl;
-		std::cout << lerp(m1, m2, 0.5f) << std::endl;
+		std::cout << lerp(m1, m2, Complex<float>(0.5, 0)) << std::endl;
 		std::cout << std::endl;
 
 		std::cout << CYAN << "[ 3d matrix ]" << BLACK << std::endl;
@@ -422,8 +422,115 @@ int	main(void)
 		std::cout << MAGENTA << "m3: " << BLACK << std::endl << m3 << std::endl;
 		std::cout << MAGENTA << "m4: " << BLACK << std::endl << m4 << std::endl;
 		std::cout << MAGENTA << "liner interpolation m3, m4 and 0.4: " << BLACK << std::endl;
-		std::cout << lerp(m3, m4, 0.4f) << std::endl;
+		std::cout << lerp(m3, m4, Complex<float>(0.4, 0)) << std::endl;
 		std::cout << std::endl;
 	}
+	std::cout << std::endl;
+	std::cout << YELLOW << "[ ex03: dot product ]" << BLACK << std::endl;
+	{
+		std::cout << CYAN << "[ 2d vector ]" << BLACK << std::endl;
+		Vector<Complex<float>>	v1({Complex<float>(-1., -1.), Complex<float>(6., 6.)});
+		Vector<Complex<float>>	v2({Complex<float>(3., 3.), Complex<float>(2., 2.)});
+		std::cout << MAGENTA << "v1: " << BLACK << std::endl << v1 << std::endl;
+		std::cout << MAGENTA << "v2: " << BLACK << std::endl << v2 << std::endl;
+		std::cout << MAGENTA << "v1 dot v2: " << BLACK << std::endl;
+		std::cout << v1.dot(v2) << std::endl;
+
+		std::cout << CYAN << "[ 3d vector ]" << BLACK << std::endl;
+		Vector<Complex<float>>	v3({Complex<float>(1., 1.), Complex<float>(2., 2.), Complex<float>(3., 3.)});
+		Vector<Complex<float>>	v4({Complex<float>(4., 4.), Complex<float>(5., 5.), Complex<float>(6., 6.)});
+		std::cout << MAGENTA << "v3: " << BLACK << std::endl << v3 << std::endl;
+		std::cout << MAGENTA << "v4: " << BLACK << std::endl << v4 << std::endl;
+		std::cout << MAGENTA << "v3 dot v4: " << BLACK << std::endl;
+		std::cout << v3.dot(v4) << std::endl;
+	}
+	std::cout << std::endl;
+	std::cout << YELLOW << "[ ex04: norm ]" << BLACK << std::endl;
+	{
+		std::cout << CYAN << "[ 2d vector ]" << BLACK << std::endl;
+		Vector<Complex<float>>	v1({Complex<float>(-1., 1.), Complex<float>(-2., 2.)});
+		std::cout << MAGENTA << "v1: " << BLACK << std::endl << v1 << std::endl;
+		std::cout << MAGENTA << "∥v1∥₁: " << BLACK;
+		std::cout << v1.norm_1() << std::endl;
+		std::cout << MAGENTA << "∥v1∥₂: " << BLACK;
+		std::cout << v1.norm() << std::endl;
+		std::cout << MAGENTA << "∥v1∥ ͚: " << BLACK;
+		std::cout << v1.norm_inf() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << CYAN << "[ 3d vector ]" << BLACK << std::endl;
+		Vector<Complex<float>>	v2({Complex<float>(-1., -2.), Complex<float>(-3., -4.), Complex<float>(-5., -6.)});
+		std::cout << MAGENTA << "v2: " << BLACK << std::endl << v2 << std::endl;
+		std::cout << MAGENTA << "∥v2∥₁: " << BLACK;
+		std::cout << v2.norm_1() << std::endl;
+		std::cout << MAGENTA << "∥v2∥₂: " << BLACK;
+		std::cout << v2.norm() << std::endl;
+		std::cout << MAGENTA << "∥v2∥ ͚: " << BLACK;
+		std::cout << v2.norm_inf() << std::endl;
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+	std::cout << YELLOW << "[ ex05: cosine ]" << BLACK << std::endl;
+	{
+		std::cout << CYAN << "[ 2d vector ]" << BLACK << std::endl;
+		Vector<Complex<float>>	v1({Complex<float>(2., 2.), Complex<float>(1., 1.)});
+		Vector<Complex<float>>	v2({Complex<float>(4., 4.), Complex<float>(2., 2.)});
+		std::cout << MAGENTA << "v1: " << BLACK << std::endl << v1 << std::endl;
+		std::cout << MAGENTA << "v2: " << BLACK << std::endl << v2 << std::endl;
+		std::cout << MAGENTA << "cosine between v1 and v2: " << BLACK << std::endl;
+		std::cout << angle_cos(v1, v2) << std::endl;
+		std::cout << std::endl;
+
+		std::cout << CYAN << "[ 3d vector ]" << BLACK << std::endl;
+		Vector<Complex<float>>	v3({Complex<float>(1., 1.), Complex<float>(2., 2.), Complex<float>(3., 3.)});
+		Vector<Complex<float>>	v4({Complex<float>(1., -1.), Complex<float>(2., -2.), Complex<float>(3., -3.)});
+		std::cout << MAGENTA << "v3: " << BLACK << std::endl << v3 << std::endl;
+		std::cout << MAGENTA << "v4: " << BLACK << std::endl << v4 << std::endl;
+		std::cout << MAGENTA << "cosine between v1 and v2: " << BLACK << std::endl;
+		std::cout << angle_cos(v3, v4) << std::endl;
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+	std::cout << YELLOW << "[ ex06: cross product ]" << BLACK << std::endl;
+	{
+		std::cout << CYAN << "[ 3d vectors ]" << BLACK << std::endl;
+		Vector<Complex<float>>	v1({Complex<float>(1., 1.), Complex<float>(2., 2.), Complex<float>(3., 3.)});
+		Vector<Complex<float>>	v2({Complex<float>(4., 4.), Complex<float>(5., 5.), Complex<float>(6., 6.)});
+		std::cout << MAGENTA << "v1: " << BLACK << std::endl << v1 << std::endl;
+		std::cout << MAGENTA << "v2: " << BLACK << std::endl << v2 << std::endl;
+		std::cout << MAGENTA << "v1 cross v2: " << BLACK << std::endl;
+		std::cout << corss_product(v1, v2) << std::endl;
+		std::cout << MAGENTA << "(v1 cross v2) dot v1(result should be 0): " << BLACK << std::endl;
+		std::cout << corss_product(v1, v2).dot(v1) << BLACK << std::endl;
+		std::cout << MAGENTA << "(v1 cross v2) dot v2(result should be 0): " << BLACK << std::endl;
+		std::cout << corss_product(v1, v2).dot(v2) << BLACK << std::endl;
+		std::cout << MAGENTA << "v1 dot (v1 cross v2)(result should be 0): " << BLACK << std::endl;
+		std::cout << v1.dot(corss_product(v1, v2)) << BLACK << std::endl;
+		std::cout << MAGENTA << "v2 dot (v1 cross v2)(result should be 0): " << BLACK << std::endl;
+		std::cout << v2.dot(corss_product(v1, v2)) << BLACK << std::endl;
+		std::cout << std::endl;
+
+		std::cout << CYAN << "[ 3d vectors ]" << BLACK << std::endl;
+		Vector<Complex<float>>	v3({Complex<float>(2., -1.), Complex<float>(3., -2.), Complex<float>(4., -3.)});
+		Vector<Complex<float>>	v4({Complex<float>(-4., 5.), Complex<float>(-5., 6.), Complex<float>(-6., 7.)});
+		std::cout << MAGENTA << "v3: " << BLACK << std::endl << v3 << std::endl;
+		std::cout << MAGENTA << "v4: " << BLACK << std::endl << v4 << std::endl;
+		std::cout << MAGENTA << "v3 cross v4: " << BLACK << std::endl;
+		std::cout << corss_product(v3, v4) << std::endl;
+		std::cout << MAGENTA << "(v3 cross v4) dot v3(result should be 0): " << BLACK << std::endl;
+		std::cout << corss_product(v3, v4).dot(v3) << BLACK << std::endl;
+		std::cout << MAGENTA << "(v3 cross v4) dot v3(result should be 0): " << BLACK << std::endl;
+		std::cout << corss_product(v3, v4).dot(v4) << BLACK << std::endl;
+		std::cout << MAGENTA << "v3 dot (v3 cross v4)(result should be 0): " << BLACK << std::endl;
+		std::cout << v3.dot(corss_product(v3, v4)) << BLACK << std::endl;
+		std::cout << MAGENTA << "v2 dot (v1 cross v2)(result should be 0): " << BLACK << std::endl;
+		std::cout << v4.dot(corss_product(v3, v4)) << BLACK << std::endl;
+		std::cout << std::endl;
+	}
+	// std::cout << std::endl;
+	// std::cout << YELLOW << "[ ex07: linear map, matrix multiplication ]" << BLACK << std::endl;
+	// {
+		
+	// }
 	return (0);
 }

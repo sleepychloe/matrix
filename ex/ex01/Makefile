@@ -6,13 +6,13 @@
 #    By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/06 05:00:28 by yhwang            #+#    #+#              #
-#    Updated: 2024/04/08 09:45:12 by yhwang           ###   ########.fr        #
+#    Updated: 2024/04/14 17:55:23 by yhwang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ex01
 CPP = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++11
+CFLAGS = -Wall -Wextra -Werror -std=c++17
 RM = rm -f
 
 FILES = ./main

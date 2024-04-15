@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:30 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/08 10:02:46 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/15 01:57:23 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <iostream>
 #include <cmath>
 #include <algorithm>
+#include "./Complex.hpp"
 
 template <typename K>
 class Vector
@@ -45,7 +46,6 @@ private:
 
 	size_t				_size;
 	std::vector<K>			_vector;
-
 };
 
 template <typename K>
