@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:45:44 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/15 22:18:08 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/16 01:23:52 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -640,6 +640,83 @@ int	main(void)
 	}
 	std::cout << std::endl;
 	std::cout << YELLOW << "[ ex11: determinant ]" << BLACK << std::endl;
+	{
+		std::cout << CYAN << "[ 2 by 2 matrix ]" << BLACK << std::endl;
+		Matrix<Complex<float>>	m1({{Complex<float>(11., 11.), Complex<float>(12., 12.)},
+					{Complex<float>(-13., -13.), Complex<float>(-14., -14.)}});
+		std::cout << MAGENTA << "m1: " << BLACK << std::endl << m1 << std::endl;
+		std::cout << MAGENTA << "det(m1): " << BLACK;
+		std::cout << m1.determinant() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << CYAN << "[ 3 by 3 matrix ]" << BLACK << std::endl;
+		Matrix<Complex<float>>	m2({{Complex<float>(11., -11.), Complex<float>(12., -12.), Complex<float>(13., -13.)},
+					{Complex<float>(19., 19.), Complex<float>(18., 18.), Complex<float>(17., 17.)},
+					{Complex<float>(-101., 1.), Complex<float>(-102., -1.), Complex<float>(-103., 1.)}});
+		std::cout << MAGENTA << "m2: " << BLACK << std::endl << m2 << std::endl;
+		std::cout << MAGENTA << "det(m2): " << BLACK;
+		std::cout << m2.determinant() << std::endl;
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+	std::cout << YELLOW << "[ ex12: inverse ]" << BLACK << std::endl;
+	{
+		std::cout << CYAN << "[ 2 by 2 matrix ]" << BLACK << std::endl;
+		Matrix<Complex<float>>	m1({{Complex<float>(11., 11.), Complex<float>(12., 12.)},
+					{Complex<float>(-13., -13.), Complex<float>(-14., -14.)}});
+		std::cout << MAGENTA << "m1: " << BLACK << std::endl << m1 << std::endl;
+		std::cout << MAGENTA << "m1⁻¹: " << BLACK;
+		std::cout << m1.inverse() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << CYAN << "[ 3 by 3 matrix ]" << BLACK << std::endl;
+		Matrix<Complex<float>>	m2({{Complex<float>(11., -11.), Complex<float>(12., -12.), Complex<float>(13., -13.)},
+					{Complex<float>(19., 19.), Complex<float>(18., 18.), Complex<float>(17., 17.)},
+					{Complex<float>(-101., 1.), Complex<float>(-102., -1.), Complex<float>(-103., 1.)}});
+		std::cout << MAGENTA << "m2: " << BLACK << std::endl << m2 << std::endl;
+		std::cout << MAGENTA << "m2⁻¹: " << BLACK << std::endl;
+		std::cout << m2.inverse() << std::endl;
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+	std::cout << YELLOW << "[ ex13: rank ]" << BLACK << std::endl;
+	{
+		std::cout << CYAN << "[ 2 by 2 matrix ]" << BLACK << std::endl;
+		Matrix<Complex<float>>	m1({{Complex<float>(11., 11.), Complex<float>(12., 12.)},
+					{Complex<float>(-13., -13.), Complex<float>(-14., -14.)}});
+		std::cout << MAGENTA << "m1: " << BLACK << std::endl << m1 << std::endl;
+		std::cout << MAGENTA << "rank(m1): " << BLACK;
+		std::cout << m1.rank() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << CYAN << "[ 2 by 2 matrix ]" << BLACK << std::endl;
+		Matrix<Complex<float>>	m2({{Complex<float>(11., 11.), Complex<float>(12., 12.)},
+					{Complex<float>(5.5, 5.5), Complex<float>(6., 6.)}});
+		std::cout << MAGENTA << "m2: " << BLACK << std::endl << m2 << std::endl;
+		std::cout << MAGENTA << "rank(m2): " << BLACK;
+		std::cout << m2.rank() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << CYAN << "[ 3 by 3 matrix ]" << BLACK << std::endl;
+		Matrix<Complex<float>>	m3({{Complex<float>(11., -11.), Complex<float>(12., -12.), Complex<float>(13., -13.)},
+					{Complex<float>(19., 19.), Complex<float>(18., 18.), Complex<float>(17., 17.)},
+					{Complex<float>(-101., 1.), Complex<float>(-102., -1.), Complex<float>(-103., 1.)}});
+		std::cout << MAGENTA << "m3: " << BLACK << std::endl << m3 << std::endl;
+		std::cout << MAGENTA << "rank(m3): " << BLACK;
+		std::cout << m3.rank() << std::endl;
+		std::cout << std::endl;
+
+		std::cout << CYAN << "[ 3 by 3 matrix ]" << BLACK << std::endl;
+		Matrix<Complex<float>>	m4({{Complex<float>(1., -1.), Complex<float>(2., -2.), Complex<float>(0., 0.)},
+					{Complex<float>(2., -2.), Complex<float>(4., -4.), Complex<float>(0., 0.)},
+					{Complex<float>(-1., 1.), Complex<float>(-2., 2.), Complex<float>(1., -1.)}});
+		std::cout << MAGENTA << "m4: " << BLACK << std::endl << m4 << std::endl;
+		std::cout << MAGENTA << "rank(m4): " << BLACK;
+		std::cout << m4.rank() << std::endl;
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+	std::cout << YELLOW << "[ ex14: projection ]" << BLACK << std::endl;
 	{
 		
 	}

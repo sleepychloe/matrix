@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/15 22:13:42 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/16 01:11:54 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -406,28 +406,41 @@ K	Matrix<K>::determinant(void) const
 	if (getRowSize() == 1)
 		return (this->_matrix[0][0]);
 	
-	K	res = 0;
+	K	res;
+	if constexpr (std::is_arithmetic<K>::value)
+		res = 0;
+	else
+		res = K();
 
-	for (size_t c = 0; c < this->_column; c++)
-		res += (c % 2 == 0 ? 1: -1) * this->_matrix[0][c] * minor(0, c).determinant();
+	if constexpr (std::is_arithmetic<K>::value)
+	{
+		for (size_t c = 0; c < this->_column; c++)
+			res += (c % 2 == 0 ? 1: -1) * this->_matrix[0][c] * minor(0, c).determinant();
+	}
+	else
+	{
+		for (size_t c = 0; c < this->_column; c++)
+			res += (c % 2 == 0 ? K(1, 0): K(-1, 0)) * this->_matrix[0][c] * minor(0, c).determinant();
+	}
 	return (res);
 }
 
 template <typename K>
 Matrix<K>	Matrix<K>::cofactor(void) const
 {
-	K		co;
-
 	if (getRowSize() == 1)
 		return (Matrix<K>{{{this->_matrix[0][0]}}});
 
 	std::vector<std::vector<K>>	res(this->_row, std::vector<K>(this->_column));
+
 	for (size_t r = 0; r < this->_row; r++)
 	{
 		for (size_t c = 0; c < this->_column; c++)
 		{
-			co = (r + c) % 2 == 0 ? 1 : -1;
-			res[r][c] += co * minor(r, c).determinant();
+			if constexpr (std::is_arithmetic<K>::value)
+				res[r][c] += ((r + c) % 2 == 0 ? 1 : -1) * minor(r, c).determinant();
+			else
+				res[r][c] += ((r + c) % 2 == 0 ? K(1, 0) : K(-1, 0)) * minor(r, c).determinant();
 		}
 	}
 	return (Matrix<K>(res));
@@ -443,7 +456,12 @@ Matrix<K>	Matrix<K>::inverse(void) const
 	}
 
 	if (getRowSize() == 1)
-		return (Matrix<K>{{{1 / this->_matrix[0][0]}}});
+	{
+		if constexpr (std::is_arithmetic<K>::value)
+			return (Matrix<K>{{{1 / this->_matrix[0][0]}}});
+		else
+			return (Matrix<K>{{{K(1, 0) / this->_matrix[0][0]}}});
+	}
 
 	K	det = determinant();
 
@@ -455,7 +473,10 @@ Matrix<K>	Matrix<K>::inverse(void) const
 
 	Matrix<K>	res = cofactor().transpose();
 
-	res.scale(1 / det);
+	if constexpr (std::is_arithmetic<K>::value)
+		res.scale(1 / det);
+	else
+		res.scale(K(1, 0) / det);
 	return (res);
 }
 
