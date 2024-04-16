@@ -6,7 +6,7 @@
 #    By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 23:40:10 by yhwang            #+#    #+#              #
-#    Updated: 2024/04/14 18:19:42 by yhwang           ###   ########.fr        #
+#    Updated: 2024/04/16 05:07:06 by yhwang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,7 @@ OBJS = $(addsuffix .o, $(FILES))
 	$(CPP) $(CFLAGS) -c $< -o $@ -I$(INCS_DIR)
 
 all: $(NAME)
-	./$(NAME) > $(PROGRAM_REQUIRE)
-	./$(PROGRAM_NAME)
+	if ./$(NAME); then ./$(NAME) > $(PROGRAM_REQUIRE) && ./$(PROGRAM_NAME); fi
 
 $(NAME): $(OBJS)
 	$(CPP) $(CFLAGS) $^ -o $@ -I$(INCS_DIR)

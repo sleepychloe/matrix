@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:45:44 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/16 01:23:52 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/16 05:11:34 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -714,11 +714,6 @@ int	main(void)
 		std::cout << MAGENTA << "rank(m4): " << BLACK;
 		std::cout << m4.rank() << std::endl;
 		std::cout << std::endl;
-	}
-	std::cout << std::endl;
-	std::cout << YELLOW << "[ ex14: projection ]" << BLACK << std::endl;
-	{
-		
 	}
 	return (0);
 }

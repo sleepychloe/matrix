@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/16 01:11:54 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/16 04:25:43 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -507,13 +507,31 @@ template <typename K>
 Matrix<K>	projection(K fov, K ratio, K near, K far)
 {
 	std::vector<std::vector<K>>	res(4, std::vector<K>(4));
-	K	scale = 1 / std::tan(fov / 2 * M_PI / 180);
+	K				scale;
 
-	res[0][0] = scale; // x coordinates of the projected point
-	res[1][1] = scale / ratio; //  y coordinates of the projected point
-	res[2][2] = -1 * far / (far - near); // remap z to [0,1]: 0(near)
-	res[3][2] = -1 * far * near / (far - near); // remap z to [0,1]: 1(far)
-	res[2][3] = -1; //set w = -z
+	if constexpr (std::is_arithmetic<K>::value)
+	{
+		scale = 1 / std::tan(fov / 2 * M_PI / 180);
+		res[0][0] = scale; // x coordinates of the projected point
+		res[1][1] = scale / ratio; //  y coordinates of the projected point
+		res[2][2] = -1 * far / (far - near); // remap z to [0,1]: 0(near)
+		res[3][2] = -1 * far * near / (far - near); // remap z to [0,1]: 1(far)
+		res[2][3] = -1; //set w = -z
+	}
+	else
+	{
+		if (fov.imag() != 0 || ratio.imag() != 0 || near.imag() != 0 || far.imag() != 0)
+		{
+			std::string	msg = "error: cannot calculate projection using parameter whose imaginary part is nonzero";
+			throw (msg);
+		}
+		scale = K(1 / std::tan(fov.real() / 2 * M_PI / 180), 0);
+		res[0][0] = scale; // x coordinates of the projected point
+		res[1][1] = scale / ratio; //  y coordinates of the projected point
+		res[2][2] = K(-1, 0) * far / (far - near); // remap z to [0,1]: 0(near)
+		res[3][2] = K(-1, 0) * far * near / (far - near); // remap z to [0,1]: 1(far)
+		res[2][3] = K(-1, 0); //set w = -z
+	}
 	return (Matrix<K>(res));
 }
 
