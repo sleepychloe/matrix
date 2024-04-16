@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:45:44 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/16 05:11:34 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/16 05:16:13 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../matrix/incs/Vector.hpp"
 #include "../../matrix/incs/Matrix.hpp"
 #include "../../matrix/incs/Linear.hpp"
-#include "../Utils.hpp"
+#include "../Color.hpp"
 #include <complex>
 
 int	main(void)

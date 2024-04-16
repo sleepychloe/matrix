@@ -6,13 +6,13 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 20:57:15 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/15 17:25:05 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/16 05:16:13 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../matrix/incs/Vector.hpp"
 #include "../../matrix/incs/Matrix.hpp"
-#include "../Utils.hpp"
+#include "../Color.hpp"
 
 int	main(void)
 {

@@ -6,12 +6,12 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 21:29:29 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/10 04:47:56 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/16 05:16:13 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../matrix/incs/Matrix.hpp"
-#include "../Utils.hpp"
+#include "../Color.hpp"
 
 int	main(void)
 {
