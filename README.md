@@ -8,7 +8,7 @@ finished but not submitted yet
 ```
   git clone https://github.com/sleepychloe/matrix.git
   cd matrix
-  bash ./test.sh [arg1] [arg2]
+  bash test.sh [arg1] [arg2]
 ```
 [arg1]: make, fclean, re, run<br>
 [arg2]: (make, fclean, re) all, 00 to 15<br>
@@ -16,9 +16,9 @@ finished but not submitted yet
 
 example
 ```
-  bash ./test.sh make all
-  bash ./test.sh run 00
-  bash ./test.sh fclean all
+  bash test.sh make all
+  bash test.sh run 00
+  bash test.sh fclean all
 ```
 
 
