@@ -1,4 +1,8 @@
-currently working on the project
+Mandatory part + every Bonus part
+
+Tested on Linux
+
+finished but not submitted yet
 
 ## Linear algebra
 
