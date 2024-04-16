@@ -4,6 +4,24 @@ Tested on Linux
 
 finished but not submitted yet
 
+## Installation & Usage
+```
+  git clone https://github.com/sleepychloe/matrix.git
+  cd matrix
+  bash ./test.sh [arg1] [arg2]
+```
+[arg1]: make, fclean, re, run
+[arg2]: (make, fclean, re) all, 00 to 15
+        (run) 00 to 15
+
+example
+```
+  bash ./test.sh make all
+  bash ./test.sh run 00
+  bash ./test.sh fclean all
+```
+
+
 ## Linear algebra
 
 ![image](https://github.com/sleepychloe/matrix/assets/78352910/6598efcf-6c71-4a68-a955-965f8a1b5e64)
