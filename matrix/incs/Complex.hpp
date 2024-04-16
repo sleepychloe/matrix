@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:54:24 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/15 05:45:06 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/16 20:52:48 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ class Complex
 public:
 	Complex();
 	Complex(const K &real, const K &imag);
+	Complex(const K &num);
 	Complex(const Complex<K> &complex);
 	Complex &operator=(const Complex<K> &complex);
 	~Complex();
@@ -49,39 +50,40 @@ template <typename K>
 std::ostream	&operator<<(std::ostream &ostream, const Complex<K> &complex);
 
 template <typename K>
-Complex<K>	operator+(const Complex<K> &l, const K &r);
-
-template <typename K>
-Complex<K>	operator+(const K &l, const Complex<K> &r);
-
-template <typename K>
 Complex<K>	operator+(const Complex<K> &l, const Complex<K> &r);
 
-template <typename K>
-Complex<K>	operator-(const Complex<K> &l, const K &r);
+template <typename K, typename T>
+Complex<K>	operator+(const Complex<K> &l, const T &r);
 
-template <typename K>
-Complex<K>	operator-(const K &l, const Complex<K> &r);
+template <typename K, typename T>
+Complex<K>	operator+(const T &l, const Complex<K> &r);
 
 template <typename K>
 Complex<K>	operator-(const Complex<K> &l, const Complex<K> &r);
 
-template <typename K>
-Complex<K>	operator*(const Complex<K> &l, const K &r);
-template <typename K>
-Complex<K>	operator*(const K &l, const Complex<K> &r);
+template <typename K, typename T>
+Complex<K>	operator-(const Complex<K> &l, const T &r);
+
+template <typename K, typename T>
+Complex<K>	operator-(const T &l, const Complex<K> &r);
 
 template <typename K>
 Complex<K>	operator*(const Complex<K> &l, const Complex<K> &r);
 
-template <typename K>
-Complex<K>	operator/(const Complex<K> &l, const K &r);
+template <typename K, typename T>
+Complex<K>	operator*(const Complex<K> &l, const T &r);
 
-template <typename K>
-Complex<K>	operator/(const K &l, const Complex<K> &r);
+template <typename K, typename T>
+Complex<K>	operator*(const T &l, const Complex<K> &r);
 
 template <typename K>
 Complex<K>	operator/(const Complex<K> &l, const Complex<K> &r);
+
+template <typename K, typename T>
+Complex<K>	operator/(const Complex<K> &l, const T &r);
+
+template <typename K, typename T>
+Complex<K>	operator/(const T &l, const Complex<K> &r);
 
 template <typename K>
 bool		operator==(const Complex<K> &l, const int &r);

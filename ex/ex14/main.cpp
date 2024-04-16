@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 23:35:11 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/16 16:34:06 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/16 21:20:04 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(void)
 		// Matrix<Complex<float>>	res = projection(Complex<float>(90., 0.),
 		// 					Complex<float>(1., 0.),
 		// 					Complex<float>(0., 0.),
-		// 					Complex<float>(100., 0.));
+		// 					Complex<float>(100., 1.));
 
 		printMatrix(res);
 	}

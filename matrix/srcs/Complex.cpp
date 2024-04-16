@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 16:04:41 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/15 05:44:57 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/16 21:13:33 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 template <typename K>
 Complex<K>::Complex(): _real(0), _imag(0)
+{
+}
+
+template <typename K>
+Complex<K>::Complex(const K &num): _real(num), _imag(num)
 {
 }
 
@@ -159,22 +164,6 @@ std::ostream	&operator<<(std::ostream &ostream, const Complex<K> &complex)
 }
 
 template <typename K>
-Complex<K>	operator+(const Complex<K> &l, const K &r)
-{
-	K	real = l.real() + r;
-	K	imag = l.imag();
-	return (Complex<K>(real, imag));
-}
-
-template <typename K>
-Complex<K>	operator+(const K &l, const Complex<K> &r)
-{
-	K	real = l + r.real();
-	K	imag = r.imag();
-	return (Complex<K>(real, imag));
-}
-
-template <typename K>
 Complex<K>	operator+(const Complex<K> &l, const Complex<K> &r)
 {
 	K	real = l.real() + r.real();
@@ -182,20 +171,26 @@ Complex<K>	operator+(const Complex<K> &l, const Complex<K> &r)
 	return (Complex<K>(real, imag));
 }
 
-template <typename K>
-Complex<K>	operator-(const Complex<K> &l, const K &r)
+template <typename K, typename T>
+Complex<K>	operator+(const Complex<K> &l, const T &r)
 {
-	K	real = l.real() - r;
-	K	imag = l.imag();
-	return (Complex<K>(real, imag));
+	if constexpr (std::is_arithmetic<T>::value)
+	{
+		K	real = l.real() + r;
+		K	imag = l.imag();
+		return (Complex<K>(real, imag));
+	}
 }
 
-template <typename K>
-Complex<K>	operator-(const K &l, const Complex<K> &r)
+template <typename K, typename T>
+Complex<K>	operator+(const T &l, const Complex<K> &r)
 {
-	K	real = l - r.real();
-	K	imag = -1 * r.imag();
-	return (Complex<K>(real, imag));
+	if constexpr (std::is_arithmetic<T>::value)
+	{
+		K	real = l + r.real();
+		K	imag = r.imag();
+		return (Complex<K>(real, imag));
+	}
 }
 
 template <typename K>
@@ -206,20 +201,26 @@ Complex<K>	operator-(const Complex<K> &l, const Complex<K> &r)
 	return (Complex<K>(real, imag));
 }
 
-template <typename K>
-Complex<K>	operator*(const Complex<K> &l, const K &r)
+template <typename K, typename T>
+Complex<K>	operator-(const Complex<K> &l, const T &r)
 {
-	K	real = l.real() * r;
-	K	imag = l.imag() * r;
-	return (Complex<K>(real, imag));
+	if constexpr (std::is_arithmetic<T>::value)
+	{
+		K	real = l.real() - r;
+		K	imag = l.imag();
+		return (Complex<K>(real, imag));
+	}
 }
 
-template <typename K>
-Complex<K>	operator*(const K &l, const Complex<K> &r)
+template <typename K, typename T>
+Complex<K>	operator-(const T &l, const Complex<K> &r)
 {
-	K	real = l * r.real();
-	K	imag = l * r.imag();
-	return (Complex<K>(real, imag));
+	if constexpr (std::is_arithmetic<T>::value)
+	{
+		K	real = l - r.real();
+		K	imag = -1 * r.imag();
+		return (Complex<K>(real, imag));
+	}
 }
 
 template <typename K>
@@ -230,22 +231,26 @@ Complex<K>	operator*(const Complex<K> &l, const Complex<K> &r)
 	return (Complex<K>(real, imag));
 }
 
-template <typename K>
-Complex<K>	operator/(const Complex<K> &l, const K &r)
+template <typename K, typename T>
+Complex<K>	operator*(const Complex<K> &l, const T &r)
 {
-	K	real = l.real() / r;
-	K	imag = l.imag() / r;
-	return (Complex<K>(real, imag));
+	if constexpr (std::is_arithmetic<T>::value)
+	{
+		K	real = l.real() * r;
+		K	imag = l.imag() * r;
+		return (Complex<K>(real, imag));
+	}
 }
 
-template <typename K>
-Complex<K>	operator/(const K &l, const Complex<K> &r)
+template <typename K, typename T>
+Complex<K>	operator*(const T &l, const Complex<K> &r)
 {
-	K	denominator = r.real() * r.real()
-				+ r.imag() * r.imag();
-	K	real = l * r.real();
-	K	imag = -1 * l * r.imag();
-	return (Complex<K>(real / denominator, imag / denominator));
+	if constexpr (std::is_arithmetic<T>::value)
+	{
+		K	real = l * r.real();
+		K	imag = l * r.imag();
+		return (Complex<K>(real, imag));
+	}
 }
 
 template <typename K>
@@ -256,6 +261,30 @@ Complex<K>	operator/(const Complex<K> &l, const Complex<K> &r)
 	K	real = l.real() * r.real() + l.imag() * r.imag();
 	K	imag = -1 * l.real() * r.imag() + l.imag() * r.real();
 	return (Complex<K>(real / denominator, imag / denominator));
+}
+
+template <typename K, typename T>
+Complex<K>	operator/(const Complex<K> &l, const T &r)
+{
+	if constexpr (std::is_arithmetic<T>::value)
+	{
+		K	real = l.real() / r;
+		K	imag = l.imag() / r;
+		return (Complex<K>(real, imag));
+	}
+}
+
+template <typename K, typename T>
+Complex<K>	operator/(const T &l, const Complex<K> &r)
+{
+	if constexpr (std::is_arithmetic<T>::value)
+	{
+		K	denominator = r.real() * r.real()
+					+ r.imag() * r.imag();
+		K	real = l * r.real();
+		K	imag = -1 * l * r.imag();
+		return (Complex<K>(real / denominator, imag / denominator));
+	}
 }
 
 template <typename K>

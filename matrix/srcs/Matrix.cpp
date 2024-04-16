@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:06:08 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/16 04:25:43 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/16 21:19:35 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,12 +182,7 @@ K	Matrix<K>::trace(void) const
 		throw (msg);
 	}
 
-	K	res;
-
-	if constexpr (std::is_arithmetic<K>::value)
-		res = 0;
-	else
-		res = K();
+	K	res = K(0);
 
 	for (size_t r = 0; r < this->_row; r++)
 	{
@@ -277,12 +272,7 @@ Matrix<K>	Matrix<K>::row_echelon(void) const
 		for (size_t c = 0; c < this->_column; c++)
 		{
 			if (res[r][c] != 0 && -1 * EPSILON < res[r][c] && res[r][c] < EPSILON)
-			{
-				if constexpr (std::is_arithmetic<K>::value)
-					res[r][c] = 0;
-				else
-					res[r][c] = K();
-			}
+				res[r][c] = K(0);
 			if (res[r][c] != 0)
 				break ;
 			if ((c == 0 && this->_column > 1) || (c > 0 && res[r][c - 1] == 0))
@@ -306,23 +296,13 @@ Matrix<K>	Matrix<K>::row_echelon(void) const
 			for (size_t i = 0; i < r; i++)
 			{
 				if (pvt[i] != this->_column && res[i][pvt[i]] != 0)
-				{
-					if constexpr (std::is_arithmetic<K>::value)
-						rowOperation_3(&res, r, -1 * res[r][pvt[i]] / res[i][pvt[i]], i);
-					else
-						rowOperation_3(&res, r, K(-1, 0) * res[r][pvt[i]] / res[i][pvt[i]], i);
-				}
+					rowOperation_3(&res, r, -1 * res[r][pvt[i]] / res[i][pvt[i]], i);
 				pvt[r] = 0;
 				setPivot(r);
 			}
 		}
 		if (pvt[r] != this->_column && res[r][pvt[r]] != 0)
-		{
-			if constexpr (std::is_arithmetic<K>::value)
-				rowOperation_2(&res, r, 1 / res[r][pvt[r]]);
-			else
-				rowOperation_2(&res, r, K(1, 0) / res[r][pvt[r]]);
-		}
+			rowOperation_2(&res, r, 1 / res[r][pvt[r]]);
 	}
 
 	/* reduced row echelon form */
@@ -331,12 +311,7 @@ Matrix<K>	Matrix<K>::row_echelon(void) const
 		for (size_t i = 0; i < this->_row; i++)
 		{
 			if (i != r && pvt[r] != this->_column && res[r][pvt[r]] != 0)
-			{
-				if constexpr (std::is_arithmetic<K>::value)
-					rowOperation_3(&res, i, -1 * res[i][pvt[r]] / res[r][pvt[r]], r);
-				else
-					rowOperation_3(&res, i, K(-1, 0) * res[i][pvt[r]] / res[r][pvt[r]], r);
-			}
+				rowOperation_3(&res, i, -1 * res[i][pvt[r]] / res[r][pvt[r]], r);
 		}
 	}
 
@@ -406,22 +381,10 @@ K	Matrix<K>::determinant(void) const
 	if (getRowSize() == 1)
 		return (this->_matrix[0][0]);
 	
-	K	res;
-	if constexpr (std::is_arithmetic<K>::value)
-		res = 0;
-	else
-		res = K();
+	K	res = K(0);
 
-	if constexpr (std::is_arithmetic<K>::value)
-	{
-		for (size_t c = 0; c < this->_column; c++)
-			res += (c % 2 == 0 ? 1: -1) * this->_matrix[0][c] * minor(0, c).determinant();
-	}
-	else
-	{
-		for (size_t c = 0; c < this->_column; c++)
-			res += (c % 2 == 0 ? K(1, 0): K(-1, 0)) * this->_matrix[0][c] * minor(0, c).determinant();
-	}
+	for (size_t c = 0; c < this->_column; c++)
+		res += (c % 2 == 0 ? 1: -1) * this->_matrix[0][c] * minor(0, c).determinant();
 	return (res);
 }
 
@@ -436,12 +399,7 @@ Matrix<K>	Matrix<K>::cofactor(void) const
 	for (size_t r = 0; r < this->_row; r++)
 	{
 		for (size_t c = 0; c < this->_column; c++)
-		{
-			if constexpr (std::is_arithmetic<K>::value)
-				res[r][c] += ((r + c) % 2 == 0 ? 1 : -1) * minor(r, c).determinant();
-			else
-				res[r][c] += ((r + c) % 2 == 0 ? K(1, 0) : K(-1, 0)) * minor(r, c).determinant();
-		}
+			res[r][c] += ((r + c) % 2 == 0 ? 1 : -1) * minor(r, c).determinant();
 	}
 	return (Matrix<K>(res));
 }
@@ -456,12 +414,7 @@ Matrix<K>	Matrix<K>::inverse(void) const
 	}
 
 	if (getRowSize() == 1)
-	{
-		if constexpr (std::is_arithmetic<K>::value)
-			return (Matrix<K>{{{1 / this->_matrix[0][0]}}});
-		else
-			return (Matrix<K>{{{K(1, 0) / this->_matrix[0][0]}}});
-	}
+		return (Matrix<K>{{{1 / this->_matrix[0][0]}}});
 
 	K	det = determinant();
 
@@ -473,10 +426,7 @@ Matrix<K>	Matrix<K>::inverse(void) const
 
 	Matrix<K>	res = cofactor().transpose();
 
-	if constexpr (std::is_arithmetic<K>::value)
-		res.scale(1 / det);
-	else
-		res.scale(K(1, 0) / det);
+	res.scale(1 / det);
 	return (res);
 }
 
@@ -510,14 +460,7 @@ Matrix<K>	projection(K fov, K ratio, K near, K far)
 	K				scale;
 
 	if constexpr (std::is_arithmetic<K>::value)
-	{
 		scale = 1 / std::tan(fov / 2 * M_PI / 180);
-		res[0][0] = scale; // x coordinates of the projected point
-		res[1][1] = scale / ratio; //  y coordinates of the projected point
-		res[2][2] = -1 * far / (far - near); // remap z to [0,1]: 0(near)
-		res[3][2] = -1 * far * near / (far - near); // remap z to [0,1]: 1(far)
-		res[2][3] = -1; //set w = -z
-	}
 	else
 	{
 		if (fov.imag() != 0 || ratio.imag() != 0 || near.imag() != 0 || far.imag() != 0)
@@ -526,12 +469,12 @@ Matrix<K>	projection(K fov, K ratio, K near, K far)
 			throw (msg);
 		}
 		scale = K(1 / std::tan(fov.real() / 2 * M_PI / 180), 0);
-		res[0][0] = scale; // x coordinates of the projected point
-		res[1][1] = scale / ratio; //  y coordinates of the projected point
-		res[2][2] = K(-1, 0) * far / (far - near); // remap z to [0,1]: 0(near)
-		res[3][2] = K(-1, 0) * far * near / (far - near); // remap z to [0,1]: 1(far)
-		res[2][3] = K(-1, 0); //set w = -z
 	}
+	res[0][0] = scale; // x coordinates of the projected point
+	res[1][1] = scale / ratio; //  y coordinates of the projected point
+	res[2][2] = -1 * far / (far - near); // remap z to [0,1]: 0(near)
+	res[3][2] = -1 * far * near / (far - near); // remap z to [0,1]: 1(far)
+	res[2][3] = -1; //set w = -z
 	return (Matrix<K>(res));
 }
 

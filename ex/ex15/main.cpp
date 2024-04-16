@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:45:44 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/16 05:16:13 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/04/16 21:08:23 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "../../matrix/incs/Matrix.hpp"
 #include "../../matrix/incs/Linear.hpp"
 #include "../Color.hpp"
-#include <complex>
 
 int	main(void)
 {
@@ -24,160 +23,130 @@ int	main(void)
 		std::cout << YELLOW << "[ test 00-01 : declare class ]" << BLACK << std::endl;
 		std::cout << CYAN << "[ real: 1, imag: 1 ]" << BLACK << std::endl;
 		Complex<float>		c1(1., 1.);
-		std::complex<float>	std_c1(1., 1.);
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
+		std::cout << MAGENTA << "c1: " << BLACK;
 		std::cout << c1 << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std::cout << std_c1 << std::endl;
 		std::cout << std::endl;
 
 		std::cout << CYAN << "[ real: 2, imag: 2 ]" << BLACK << std::endl;
 		Complex<float>		c2(2., 2.);
-		std::complex<float>	std_c2(2., 2.);
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
+		std::cout << MAGENTA << "c2: " << BLACK;
 		std::cout << c2 << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std::cout << std_c2 << std::endl;
-		std::cout << std::endl;
 
+		std::cout << std::endl;
 		std::cout << YELLOW << "[ test 00-02 : overloading + ]" << BLACK << std::endl;
-		std::cout << CYAN << "[ (1, 1) + (2, 2) ]" << BLACK << std::endl;
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
+		std::cout << MAGENTA << "(1 + 1i) + (2 + 2i): " << BLACK;
 		std::cout << c1 + c2 << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std::cout << std_c1 + std_c2 << std::endl << std::endl;
-		std::cout << std::endl;
 
+		std::cout << MAGENTA << "(1 + 1i) + (int)2: " << BLACK;
+		std::cout << c1 + (int)2 << std::endl;
+
+		std::cout << MAGENTA << "(1 + 1i) + (float)2: " << BLACK;
+		std::cout << c1 + (float)2 << std::endl;
+
+		std::cout << MAGENTA << "(int)2 + (1 + 1i): " << BLACK;
+		std::cout << (int)2 + c1 << std::endl;
+
+		std::cout << MAGENTA << "(float)2 + (1 + 1i): " << BLACK;
+		std::cout << (float)2 + c1 << std::endl;
+
+		std::cout << std::endl;
 		std::cout << YELLOW << "[ test 00-03 : overloading - ]" << BLACK << std::endl;
-		std::cout << CYAN << "[ (1, 1) - (2, 2) ]" << BLACK << std::endl;
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
+		std::cout << MAGENTA << "(1 + 1i) - (2 + 2i): " << BLACK;
 		std::cout << c1 - c2 << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std::cout << std_c1 - std_c2 << std::endl << std::endl;
-		std::cout << std::endl;
 
+		std::cout << MAGENTA << "(1 + 1i) - (int)2: " << BLACK;
+		std::cout << c1 - (int)2 << std::endl;
+
+		std::cout << MAGENTA << "(1 + 1i) - (float)2: " << BLACK;
+		std::cout << c1 - (float)2 << std::endl;
+
+		std::cout << MAGENTA << "(int)2 - (1 + 1i): " << BLACK;
+		std::cout << (int)2 - c1 << std::endl;
+
+		std::cout << MAGENTA << "(float)2 - (1 + 1i): " << BLACK;
+		std::cout << (float)2 - c1 << std::endl;
+
+		std::cout << std::endl;
 		std::cout << YELLOW << "[ test 00-04 : overloading * ]" << BLACK << std::endl;
-		std::cout << CYAN << "[ (1, 1) * 2 ]" << BLACK << std::endl;
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
-		std::cout << c1 * 2.f << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std::cout << std_c1 * 2.f << std::endl;
-		std::cout << std::endl;
-
-		std::cout << YELLOW << "[ test 00-05 : overloading / ]" << BLACK << std::endl;
-		std::cout << CYAN << "[ (1, 1) / 2 ]" << BLACK << std::endl;
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
-		std::cout << c1 / 2.f << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std::cout << std_c1 / 2.f << std::endl;
-		std::cout << std::endl;
-
-		std::cout << YELLOW << "[ test 00-06 : overloading * ]" << BLACK << std::endl;
-		std::cout << CYAN << "[ (1, 1) * (2, 2) ]" << BLACK << std::endl;
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
+		std::cout << MAGENTA << "(1 + 1i) * (2 + 2i): " << BLACK;
 		std::cout << c1 * c2 << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std::cout << std_c1 * std_c2 << std::endl;
-		std::cout << std::endl;
-		
-		std::cout << YELLOW << "[ test 00-07 : overloading / ]" << BLACK << std::endl;
-		std::cout << CYAN << "[ (1, 1) / (2, 2) ]" << BLACK << std::endl;
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
-		std::cout << c1 / c2 << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std::cout << std_c1 / std_c2 << std::endl;
-		std::cout << std::endl;
 
-		std::cout << YELLOW << "[ test 00-08 : overloading += ]" << BLACK << std::endl;
+		std::cout << MAGENTA << "(1 + 1i) * (int)2: " << BLACK;
+		std::cout << c1 * (int)2 << std::endl;
+
+		std::cout << MAGENTA << "(1 + 1i) * (float)2: " << BLACK;
+		std::cout << c1 * (float)2 << std::endl;
+
+		std::cout << MAGENTA << "(int)2 * (1 + 1i): " << BLACK;
+		std::cout << (int)2 * c1 << std::endl;
+
+		std::cout << MAGENTA << "(float)2 * (1 + 1i): " << BLACK;
+		std::cout << (float)2 * c1 << std::endl;
+
+		std::cout << std::endl;
+		std::cout << YELLOW << "[ test 00-05 : overloading / ]" << BLACK << std::endl;
+		std::cout << MAGENTA << "(1 + 1i) / (2 + 2i): " << BLACK;
+		std::cout << c1 / c2 << std::endl;
+
+		std::cout << MAGENTA << "(1 + 1i) / (int)2: " << BLACK;
+		std::cout << c1 / (int)2 << std::endl;
+
+		std::cout << MAGENTA << "(1 + 1i) / (float)2: " << BLACK;
+		std::cout << c1 / (float)2 << std::endl;
+
+		std::cout << MAGENTA << "(int)2 / (1 + 1i): " << BLACK;
+		std::cout << (int)2 / c1 << std::endl;
+
+		std::cout << MAGENTA << "(float)2 / (1 + 1i): " << BLACK;
+		std::cout << (float)2 / c1 << std::endl;
+
+		std::cout << std::endl;
+		std::cout << YELLOW << "[ test 00-06 : overloading += ]" << BLACK << std::endl;
 		Complex<float>		c(1., 1.);
-		std::complex<float>	std_c(1., 1.);
-		std::cout << CYAN << "[ (1, 1) += 2 ]" << BLACK << std::endl;
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
+		std::cout << MAGENTA << "(1 + 1i) += 2: " << BLACK;
 		c += 2;
 		std::cout << c << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std_c += 2;
-		std::cout << std_c << std::endl;
-		std::cout << std::endl;
 
 		c = Complex<float>(1., 1.);
-		std_c = std::complex<float>(1., 1.);
-		std::cout << CYAN << "[ (1, 1) += (2, 2) ]" << BLACK << std::endl;
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
+		std::cout << MAGENTA << "(1 + 1i) += (2 + 2i): " << BLACK;
 		c += Complex<float>(2., 2.);
 		std::cout << c << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std_c += std::complex<float>(2., 2.);
-		std::cout << std_c << std::endl;
-		std::cout << std::endl;
 
-		std::cout << YELLOW << "[ test 00-09 : overloading -= ]" << BLACK << std::endl;
+		std::cout << std::endl;
+		std::cout << YELLOW << "[ test 00-07 : overloading -= ]" << BLACK << std::endl;
 		c = Complex<float>(1., 1.);
-		std_c = std::complex<float>(1., 1.);
-		std::cout << CYAN << "[ (1, 1) -= 2 ]" << BLACK << std::endl;
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
+		std::cout << MAGENTA << "(1 + 1i) -= 2: " << BLACK;
 		c -= 2;
 		std::cout << c << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std_c -= 2;
-		std::cout << std_c << std::endl;
-		std::cout << std::endl;
 
 		c = Complex<float>(1., 1.);
-		std_c = std::complex<float>(1., 1.);
-		std::cout << CYAN << "[ (1, 1) -= (2, 2) ]" << BLACK << std::endl;
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
+		std::cout << MAGENTA << "(1 + 1i) -= (2 + 2i): " << BLACK;
 		c -= Complex<float>(2., 2.);
 		std::cout << c << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std_c -= std::complex<float>(2., 2.);
-		std::cout << std_c << std::endl;
-		std::cout << std::endl;
 
-		std::cout << YELLOW << "[ test 00-09 : overloading *= ]" << BLACK << std::endl;
+		std::cout << std::endl;
+		std::cout << YELLOW << "[ test 00-08 : overloading *= ]" << BLACK << std::endl;
 		c = Complex<float>(1., 1.);
-		std_c = std::complex<float>(1., 1.);
-		std::cout << CYAN << "[ (1, 1) *= 2 ]" << BLACK << std::endl;
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
+		std::cout << MAGENTA << "(1 + 1i) *= 2: " << BLACK;
 		c *= 2;
 		std::cout << c << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std_c *= 2;
-		std::cout << std_c << std::endl;
-		std::cout << std::endl;
 
 		c = Complex<float>(1., 1.);
-		std_c = std::complex<float>(1., 1.);
-		std::cout << CYAN << "[ (1, 1) *= (2, 2) ]" << BLACK << std::endl;
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
+		std::cout << MAGENTA << "(1 + 1i) *= (2 + 2i): " << BLACK;
 		c *= Complex<float>(2., 2.);
 		std::cout << c << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std_c *= std::complex<float>(2., 2.);
-		std::cout << std_c << std::endl;
+
 		std::cout << std::endl;
-		
 		std::cout << YELLOW << "[ test 00-09 : overloading /= ]" << BLACK << std::endl;
 		c = Complex<float>(1., 1.);
-		std_c = std::complex<float>(1., 1.);
-		std::cout << CYAN << "[ (1, 1) /= 2 ]" << BLACK << std::endl;
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
+		std::cout << MAGENTA << "(1 + 1i) /= 2: " << BLACK;
 		c /= 2;
 		std::cout << c << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std_c /= 2;
-		std::cout << std_c << std::endl;
-		std::cout << std::endl;
 
 		c = Complex<float>(1., 1.);
-		std_c = std::complex<float>(1., 1.);
-		std::cout << CYAN << "[ (1, 1) /= (2, 2) ]" << BLACK << std::endl;
-		std::cout << MAGENTA <<  "Complex class: "  << BLACK;
+		std::cout << MAGENTA << "(1 + 1i) /= (2 + 2i): " << BLACK;
 		c /= Complex<float>(2., 2.);
 		std::cout << c << std::endl;
-		std::cout << MAGENTA <<  "std::complex:  "  << BLACK;
-		std_c /= std::complex<float>(2., 2.);
-		std::cout << std_c << std::endl;
 		std::cout << std::endl;
 	}
 	std::cout << std::endl;
