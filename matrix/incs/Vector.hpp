@@ -6,7 +6,7 @@
 /*   By: yhwang <yhwang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 02:18:30 by yhwang            #+#    #+#             */
-/*   Updated: 2024/04/15 22:00:03 by yhwang           ###   ########.fr       */
+/*   Updated: 2024/06/15 19:26:57 by yhwang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ template <typename K>
 class Vector
 {
 public:
+	Vector();
+	Vector(size_t size);
 	Vector(const std::vector<K> &vector);
+	Vector(std::initializer_list<K> list);
 	Vector(const Vector<K> &vector);
 	Vector& operator=(const Vector<K> &vector);
 	~Vector();
@@ -42,8 +45,6 @@ public:
 	Vector<K>			conjugate(void) const;
 	
 private:
-	Vector();
-
 	size_t				_size;
 	std::vector<K>			_vector;
 };
@@ -53,6 +54,21 @@ K		angle_cos(const Vector<K> &u, const Vector<K> &v);
 
 template <typename K>
 Vector<K>	corss_product(const Vector<K> &u, const Vector<K> &v);
+
+template <typename K>
+Vector<K>	operator+(const Vector<K> &l, const Vector<K> &r);
+
+template <typename K>
+Vector<K>	operator-(const Vector<K> &l, const Vector<K> &r);
+
+template <typename K, typename T>
+Vector<K>	operator*(const T &l, const Vector<K> &r);
+
+template <typename K, typename T>
+Vector<K>	operator*(const Vector<K> &l, const T &r);
+
+template <typename K, typename T>
+Vector<K>	operator/(const Vector<K> &l, const T &r);
 
 template <typename K>
 std::ostream	&operator<<(std::ostream &ostream, const Vector<K> &vector);
