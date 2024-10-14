@@ -2,7 +2,7 @@ Mandatory part + every Bonus part
 
 Tested on Linux
 
-finished but not submitted yet
+Success 125/100
 
 ## Installation & Usage
 ```
